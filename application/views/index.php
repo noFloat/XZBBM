@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  
 	<title>学长学姐帮帮忙</title>
-	<link rel="stylesheet" href="static/css/index.debug.css">
+	<link rel="stylesheet" href="<?php echo base_url('static/css/index.debug.css'); ?>">
 	<style>
 		@media screen and (min-width:320px) {
 		    html {
@@ -52,9 +52,9 @@
 	<div class="new">
 		<a href="detail.html" class="content">
 			<div class="content-top">
-				<img class = "userPic" src="static/img/mainPic.png" alt="">
+				<img class = "userPic" src="<?php echo base_url('static/img/mainPic.png'); ?>" alt="">
 				<span class = "userName">老司机一号</span>
-				<img class = "arrow" src="static/img/arrow-r.png" alt="">
+				<img class = "arrow" src="<?php echo base_url('static/img/arrow-r.png'); ?>" alt="">
 			</div>
 			<div class="content-main">
 				<h1>关于大一住宿的问题</h1>
@@ -67,18 +67,18 @@
 		</a>
 		<a href="detail.html" class="content">
 			<div class="content-top">
-				<img class = "userPic" src="static/img/mainPic.png" alt="">
+				<img class = "userPic" src="<?php echo base_url('static/img/mainPic.png'); ?>" alt="">
 				<span class = "userName">老司机一号</span>
-				<img class = "arrow" src="static/img/arrow-r.png" alt="">
+				<img class = "arrow" src="<?php echo base_url('static/img/arrow-r.png'); ?>" alt="">
 			</div>
 			<div class="content-main">
 				<h1>从火车站怎么来重邮？</h1>
 				<p>学弟一枚，想问问关于大一的住宿情况，据说男生都是住在一、五、六、栋啊，条件怎么样啊，几人间呢，有没有独立的卫生间浴室等等</p>
 			</div>
 			<div class="content-pic">
-				<img src="static/img/exmple.png" alt="">
-				<img src="static/img/exmple.png" alt="">	
-				<img src="static/img/exmple.png" alt="">		
+				<img src="<?php echo base_url('static/img/exmple.png'); ?>" alt="">
+				<img src="<?php echo base_url('static/img/exmple.png'); ?>" alt="">
+				<img src="<?php echo base_url('static/img/exmple.png'); ?>" alt="">
 			</div>
 			<div class="content-bottom">
 				<span class = "time">1分钟前</span>
@@ -88,18 +88,18 @@
 		</a>
 		<a href="detail.html" class="content">
 			<div class="content-top">
-				<img class = "userPic" src="static/img/mainPic.png" alt="">
+				<img class = "userPic" src="<?php echo base_url('static/img/mainPic.png'); ?>" alt="">
 				<span class = "userName">老司机一号</span>
-				<img class = "arrow" src="static/img/arrow-r.png" alt="">
+				<img class = "arrow" src="<?php echo base_url('static/img/arrow-r.png'); ?>" alt="">
 			</div>
 			<div class="content-main">
 				<h1>从火车站怎么来重邮？</h1>
 				<p>学弟一枚，想问问关于大一的住宿情况，据说男生都是住在一、五、六、栋啊，条件怎么样啊，几人间呢，有没有独立的卫生间浴室等等</p>
 			</div>
 			<div class="content-pic">
-				<img src="static/img/exmple.png" alt="">
-				<img src="static/img/exmple.png" alt="">	
-				<img src="static/img/exmple.png" alt="">		
+				<img src="<?php echo base_url('static/img/exmple.png'); ?>" alt="">
+				<img src="<?php echo base_url('static/img/exmple.png'); ?>" alt="">
+				<img src="<?php echo base_url('static/img/exmple.png'); ?>" alt="">
 			</div>
 			<div class="content-bottom">
 				<span class = "time">1分钟前</span>
@@ -111,9 +111,9 @@
 	<div class="hot">
 		<a href="detail.html" class="content">
 			<div class="content-top">
-				<img class = "userPic" src="static/img/mainPic.png" alt="">
+				<img class = "userPic" src="<?php echo base_url('static/img/mainPic.png'); ?>" alt="">
 				<span class = "userName">老司机一号</span>
-				<img class = "arrow" src="static/img/arrow-r.png" alt="">
+				<img class = "arrow" src="<?php echo base_url('static/img/arrow-r.png'); ?>" alt="">
 			</div>
 			<div class="content-main">
 				<h1>关于大一住宿的问题</h1>
@@ -170,25 +170,25 @@
 	<footer>
 		<div class="index">
 			<a href="index.php">
-				<img src="static/img/index-icon-c.png" alt="">
+				<img src="<?php echo base_url('static/img/index-icon-c.png'); ?>" alt="">
 				首页
 			</a>
 		</div>
 		<div class="question">
 			<a href="question.html">
-				<img src="static/img/question-icon.png" alt="">
+				<img src="<?php echo base_url('static/img/question-icon.png'); ?>" alt="">
 				提问
 			</a>
 		</div>
 		<div class="search">
 			<a href="search.html">
-				<img src="static/img/search-icon.png" alt="">
+				<img src="<?php echo base_url('static/img/search-icon.png'); ?>" alt="">
 				查找
 			</a>
 		</div>
 		<div class="user">
 			<a href="user.html">
-				<img src="static/img/user-icon.png" alt="">
+				<img src="<?php echo base_url('static/img/user-icon.png'); ?>" alt="">
 				个人中心
 			</a>
 		</div>
@@ -196,5 +196,5 @@
 </body>
 <script src="http://a.alipayobjects.com/??amui/zepto/1.1.3/zepto.js,static/fastclick/1.0.6/fastclick.min.js"></script>
 <script>FastClick.attach(document.body);</script>
-<script src = "static/js/index.js"></script>
+<script src = "<?php echo base_url('static/js/index.js'); ?>"></script>
 </html>
