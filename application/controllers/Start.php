@@ -28,10 +28,15 @@ class Start extends CI_Controller{
     }
 
     public function index() {
-        if(empty($_SESSION['isLogin'])){
+        if(empty($_SESSION['openid'])){
             redirect($this->getAuthUrl());
             exit;
         }
+        if(empty($_SESSION['isLogin'])){
+            redirect(base_url('index.php/start/login'));
+            exit;
+        }
+        $this->load->view('index');
     }
 
     public function login(){
@@ -62,11 +67,13 @@ class Start extends CI_Controller{
         }
         $openId = $this->getOpenId($_REQUEST['code']);
         if(!$this->isSubscribe($openId)){
+            redirect('http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Bind/Bind/bind');
             echo '<h1>';
             echo '请先关注小帮手<^_^>';
             echo '</h1>';
             exit;
         }
+        $_SESSION['openid'] = $openId;
         redirect(base_url('index.php/start/index'));
 
     }
@@ -84,7 +91,7 @@ class Start extends CI_Controller{
         );
         $result = curl_api($this->api['webAuth'], $data);
         $openId = $result->data->openid;
-        $_SESSION['openid'] = $openId;
+//        $_SESSION['openid'] = $openId;
         return $openId;
     }
 
