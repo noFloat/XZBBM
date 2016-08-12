@@ -187,6 +187,16 @@ function formatTime($time){
     }
 }
 
-function get_user_group(){
-
+/**
+ * 检查上传的文件名是否是UNIQID生成的，即纯数字+字母
+ * @param $name
+ * @return bool
+ */
+function check_filename($name){
+    if(is_null($name)){
+        return false;
+    }
+    $pattern = '/^[a-zA-Z0-9]+$/';
+    $ret = preg_match($pattern, $name);
+    return $ret?true:false;
 }

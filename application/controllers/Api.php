@@ -17,6 +17,15 @@ class Api extends CI_Controller{
         parent::__construct();
     }
 
+    public function showImg($name){
+        $path = './upload/';
+        if(!file_exists($name) || !check_filename($name)){
+            set_status_header(404);
+            exit;
+        }
+        echo file_get_contents($path.$name);
+    }
+
     public function addQuestion(){
         if($_SESSION['userType'] != 1){
             ajax(retData(401, '只允许萌新提问哦'));

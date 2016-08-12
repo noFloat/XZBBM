@@ -150,7 +150,7 @@ class Discuss_model extends CI_Model{
                 $value['name'] = $userInfo['name'];
                 $value['gender'] = $userInfo['sex'];
             }
-            $value['pic_name'] = explode("\r\n", $value['pic_name']);
+            $value['pic_name'] = explode("#", $value['pic_name']);
             $value['tag'] = explode(",", $value['tag']);
             $value['time'] = formatTime(strtotime($value['create_time']));
             $result_f[] = $value;
