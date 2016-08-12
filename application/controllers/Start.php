@@ -105,12 +105,25 @@ class Start extends CI_Controller{
         return $result->status == 200?true:false;
     }
 
+    //userType 1 2016级 2 志愿学长 3 其他
     private function loginSuccess($userData) {
         $_SESSION['userInfo'] = $userData;
         $_SESSION['isLogin'] = true;
         if("2016" == $userData->grade){
+
+        }
+        $this->load->model('senior_model');
+        $senior = $this->senior_model->isSenior($userData->stuNum);
+        if($senior){
+            $_SESSION['userType'] = 2;
+            $_SESSION['seniorInfo'] = $senior;
+        }else{
+            if(is_junior($userData->stuNum)){
+                $_SESSION['userType'] = 1;
+            }else{
+                $_SESSION['userType'] = 3;
+            }
             $this->load->model('junior_model');
-            $_SESSION['userType'] = 1;
             $ret = $this->junior_model->checkUserExist($userData->stuNum);
             if(empty($ret)){
                 $openId = $_SESSION['openid'];
@@ -120,12 +133,7 @@ class Start extends CI_Controller{
                 $ret = $this->junior_model->addUser($userData);
             }
         }
-        $this->load->model('senior_model');
-        $senior = $this->senior_model->isSenior($userData->stuNum);
-        if($senior){
-            $_SESSION['seniorInfo'] = $senior;
-        }
-        redirect('index.php/welcome/index');
+        ajax(retData(200, 'ok'));
 
     }
 

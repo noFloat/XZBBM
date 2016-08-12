@@ -9,8 +9,18 @@
  */
 class Api extends CI_Controller{
 
+    public function __construct() {
+        //TODO:记得取消注释
+        if(!checkLogin()){
+            redirect('index.php');
+        }
+        parent::__construct();
+    }
+
     public function addQuestion(){
-        //TODO:xss过滤有问题
+        if($_SESSION['userType'] != 1){
+            ajax(retData(401, '只允许萌新提问哦'));
+        }
         $data['title'] = param($_POST['title']);
         $data['content'] = param($_POST['content']);
         $data['tag'] = $_POST['tag'];
@@ -23,7 +33,7 @@ class Api extends CI_Controller{
             ajax(retData(412, '请添加标签'));
 //        dump($data);
         $data['pic_name'] = $this->uploadImg();
-        $_SESSION['userInfo']['stuNum'] = '2016210001';//TODO:记得删除
+//        $_SESSION['userInfo']['stuNum'] = '2016210001';//TODO:记得删除
         $data['author_id'] = $_SESSION['userInfo']['stuNum'];
         $data['pid'] = 0;
         $this->load->model('discuss_model');
@@ -32,9 +42,12 @@ class Api extends CI_Controller{
     }
 
     public function reply(){
+        if($_SESSION['userType'] == 3){
+            ajax(retData(401, '只允许志愿者和萌新回答哦'));
+        }
         $data['pid'] = intval($_POST['pid']);
         $data['content'] = param($_POST['content']);
-        $_SESSION['userInfo']['stuNum'] = '2016210001';//TODO:记得删除
+//        $_SESSION['userInfo']['stuNum'] = '2016210001';//TODO:记得删除
         $data['author_id'] = $_SESSION['userInfo']['stuNum'];
         $data['pic_name'] = $this->uploadImg();
         $this->load->model('discuss_model');
@@ -42,16 +55,15 @@ class Api extends CI_Controller{
         ajax(retData(200, 'ok'));
     }
 
-    public function search(){
-        $type = $_GET['type'];
+    public function search($type = 'tag', $query = ""){
         if($type == 'tag'){
-            $tag = $_POST['tag'];
+            $tag = $query;
             $this->load->model('discuss_model');
             $result = $this->discuss_model->searchByTag($tag);
             ajax($result);
         }
-        if($type == 'word'){
-            $word = $_POST['word'];
+        if($type == 'w'){
+            $word = $query;
             $this->load->model('discuss_model');
             $result = $this->discuss_model->searchByWord($word);
             ajax($result);
@@ -59,17 +71,66 @@ class Api extends CI_Controller{
         ajax(retData('404', 'unknown type'));
     }
 
-    public function getQuestion($by = 'new', $page = 1, $limit = 10){
-        if($by == 'new'){
+    public function getQuestion($by = '最新问题', $page = 1, $limit = 10){
+        $by = urldecode($by);
+        if($by == '最新问题'){
             $this->load->model('discuss_model');
             $result = $this->discuss_model->getByNew($page, $limit);
             ajax($result);
         }
-        if($by == 'hot'){
+        if($by == '最热问题'){
             $this->load->model('discuss_model');
             $result = $this->discuss_model->getByHot($page, $limit);
             ajax($result);
         }
+        ajax(retData(404, '没有改类别'));
+    }
+
+    public function question($id){
+        if(empty($id)){
+            ajax(retData(400, '错误的问题id'));
+        }
+        $id = intval($id);
+        $this->load->model('discuss_model');
+        $result = $this->discuss_model->showQuestion($id);
+        if(empty($result)){
+            ajax(retData(400, '错误的问题id'));
+        }
+        ajax($result);
+    }
+
+    public function user($stuId) {
+        if(empty($stuId)){
+            ajax(retData(400, '参数错误'));
+        }
+        $this->load->model('discuss_model');
+        $result = $this->discuss_model->showUser($stuId);
+        if(empty($result)){
+            ajax(retData(404, '未找到此用户'));
+        }
+        ajax($result);
+    }
+
+    public function whoami(){
+//        $_SESSION['userInfo']['stuNum'] = '2015210001';
+        $stuId = $_SESSION['userInfo']['stuNum'];
+        $this->load->model('discuss_model');
+        $result = $this->discuss_model->showUser($stuId);
+        ajax($result);
+    }
+
+    public function like($id){
+//        $_SESSION['userInfo']['stuNum'] = '2015210001';
+        if(empty($id)){
+            ajax(retData(400, '请传入id'));
+        }
+        $id = intval($id);
+        $this->load->model('discuss_model');
+        $ret = $this->discuss_model->likeMgr($id);
+        if($ret === false){
+            ajax(retData(400, '参数错误'));
+        }
+        ajax(array('like_count' => $ret));
     }
 
     private function uploadImg(){

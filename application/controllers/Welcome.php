@@ -20,10 +20,10 @@ class Welcome extends CI_Controller {
 	 */
 
     public function index() {
-        if(empty($_SESSION['isLogin'])){
-            redirect('/index.php/start/index');
-            exit;
-        }
+//        if(empty($_SESSION['isLogin'])){
+//            redirect('/index.php/start/index');
+//            exit;
+//        }
         $this->load->view('home');
     }
 }
