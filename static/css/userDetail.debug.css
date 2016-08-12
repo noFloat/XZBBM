@@ -1,0 +1,162 @@
+html {
+  font-family: HYXiaoMaiTiJ,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  margin-top: 1.706667rem;
+  width: 10rem;
+  height: 16.08rem;
+  background: url(../img/bg3.png);
+  background-repeat: repeat-y;
+  background-size: 100%;
+}
+
+.userMassage {
+  height: 3rem;
+  width: 10rem;
+}
+
+.userMassage .text {
+  margin: 0.266667rem auto;
+  width: 4.2rem;
+  height: 0.4rem;
+}
+
+.userMassage .text .userName {
+  float: left;
+  margin-left: 1rem;
+  width: 2.066667rem;
+  height: 0.4rem;
+  font-size: 0.4rem;
+}
+
+.userMassage .text .userSex {
+  float: right;
+  background-color: #2fbeff;
+  color: #fff;
+  font-size: 0.32rem;
+  border-radius: 0.133333rem;
+  width: 1rem;
+  height: 0.4rem;
+  text-align: center;
+}
+
+.userMassage .userPic {
+  display: block;
+  margin: 0 auto;
+  width: 2.186667rem;
+  height: 2.186667rem;
+  border-radius: 50%;
+  border: 0.013333rem solid #cdecf4;
+}
+
+.mainMessage {
+  overflow: hidden;
+  height: auto;
+  width: 9.2rem;
+  background-color: rgba(255,255,255,.5);
+  margin: 0.733333rem auto;
+  font-size: 0.373333rem;
+  line-height: 1.146667rem;
+}
+
+.mainMessage img {
+  display: block;
+  float: left;
+  width: 0.533333rem;
+  height: 0.533333rem;
+  margin-top: 0.28rem;
+  margin-right: 0.133333rem;
+}
+
+.mainMessage .sex {
+  height: 1.146667rem;
+  width: 8.64rem;
+  margin: 0 auto;
+  border-bottom: 0.013333rem solid #d2e5ed;
+}
+
+.mainMessage .sex label {
+  float: right;
+  color: #7e8787;
+}
+
+.mainMessage .collage {
+  height: 1.146667rem;
+  width: 8.64rem;
+  margin: 0 auto;
+  border-bottom: 0.013333rem solid #d2e5ed;
+}
+
+.mainMessage .collage label {
+  float: right;
+  color: #7e8787;
+}
+
+.mainMessage .teacher {
+  height: 1.146667rem;
+  width: 8.64rem;
+  margin: 0 auto;
+  border-bottom: 0.013333rem solid #d2e5ed;
+}
+
+.mainMessage .teacher label {
+  float: right;
+  color: #7e8787;
+}
+
+.mainMessage .userDetail {
+  overflow: hidden;
+  height: auto;
+  width: 8.64rem;
+  margin: 0 auto;
+}
+
+.mainMessage .userDetail p {
+  margin: 0;
+  font-size: 0.32rem;
+  line-height: 0.4rem;
+  color: #474c4b;
+  width: 8.64rem;
+  height: auto;
+  margin-bottom: 0.266667rem;
+}
+
+.myAnswer {
+  height: 1.146667rem;
+  width: 9.2rem;
+  background-color: rgba(255,255,255,.5);
+  margin: 0.4rem auto;
+  font-size: 0.373333rem;
+  line-height: 1.146667rem;
+  border: 0.013333rem solid #a5e8ff;
+}
+
+.myAnswer img {
+  display: block;
+  float: left;
+  width: 0.533333rem;
+  height: 0.533333rem;
+  margin-top: 0.28rem;
+  margin-right: 0.133333rem;
+}
+
+.myAnswer a {
+  display: block;
+  height: 1.146667rem;
+  width: 8.64rem;
+  margin: 0 auto;
+  color: #000;
+  text-decoration: none;
+}
+
+.myAnswer label {
+  float: right;
+  color: #7e8787;
+}
+
+.myAnswer span {
+  float: right;
+  margin-left: 0.4rem;
+}

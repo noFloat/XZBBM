@@ -1,0 +1,303 @@
+html {
+  font-family: 'HYXiaoMaiTiJ',"Helvetica Neue", Helvetica, Arial, "Microsoft YaHei", sans-serif;
+}
+body {
+  margin: 0px auto;
+  margin-top: 128px;
+  width: 750px;
+  height: 1206px;
+  background: url("../img/bg2.png");
+  background-repeat: repeat-y;
+  background-size: 100%;
+}
+
+.content-wp {
+    background: rgba(255,255,255,0.5); 
+    margin: 0 auto;
+    width: 690px;
+    overflow: hidden;
+    margin-top: 30px;
+    height: auto;
+    border:1px solid #a9e4ef;
+}
+
+.content {
+  width: 650px;
+  margin: 0 auto;
+  border-bottom:1px solid #d6e4e7;
+  .content-top {
+    background-color: rgba(0,0,0,0);
+    margin-top: 19px;
+    width: 100%;
+    height: 70px;
+    line-height: 50px;
+    .userPic {
+      float: left;
+      display: block;
+      box-sizing: border-box;
+      margin: 0;
+      margin-right: 20px;
+      width: 70px;  
+      height: 70px;
+      border:1px solid #a9e4ef;
+      border-radius: 50%;
+    }
+    .userName {
+      display: block;
+      font-size: 28px;
+      color: #889192;
+      .userSex {
+        display: inline-block;
+        background-color: #3ef39f;
+        color: white;
+        font-size: 20px;
+        border-radius: 10px;
+        width: 75px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin-left: 10px;
+      }
+    }
+    .time {
+      height: 24px; 
+      color: #cdd6d7;
+      line-height: 24px;
+      font-size: 24px;
+      display: block;
+    }
+  }
+  .content-main {
+    background-color: rgba(0,0,0,0);
+    margin-top: 19px;
+    width: 100%;
+    height: auto;
+    h1 {
+      margin: 0px;
+      font-size: 30px;
+      color: #333333;
+    }
+    p {
+      margin: 0px auto;
+      margin-top: 20px;
+      width: 650px;
+      height: auto;
+      line-height: 36px;
+      font-size: 24px;
+      color: #525758;
+    }
+  }
+
+  .content-pic {
+    width: 650px;
+    height: 168px;
+    background-color: rgba(0,0,0,0);
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    img {
+      display: block;
+      margin-left: 15px;
+      float: left;
+      width: 206px;
+      height: 168px;
+    }
+    img:first-child {
+      margin-left: 0px;
+    }
+  }
+}
+
+.comment {
+  overflow: hidden;
+  width: 650px;
+  height: auto;
+  margin: 0 auto;
+  img{
+    float: left;
+    display: block;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    margin-top: 30px;
+  }
+  .commentText {
+    border-bottom:1px solid #d6e4e7;
+    float: right;
+    width: 578px;
+    margin-top: 40px;
+    height: auto;
+    .userName {
+      display: block;
+      font-size: 28px;
+      color: #889192;
+      .userSex {
+        display: inline-block;
+        background-color:#2fbeff;
+        color: white;
+        font-size: 20px;
+        border-radius: 10px;
+        width: 75px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        margin-left: 10px;
+      }
+    }
+  }
+  .comment-main {
+    margin-top: 20px;
+    width: 100%;
+    height: auto;
+    p {
+      margin: 0px auto;
+      margin-top: 20px;
+      width: 578px;
+      height: auto;
+      line-height: 36px;
+      font-size: 24px;
+      color: #525758;
+    }
+  }
+  .comment-bottom {
+    height: 40px; 
+    width: 578px;
+    margin: 20px auto;
+    color: #cdd6d7;
+    line-height: 50px;
+    font-size: 24px;
+    .time {
+      display: block;
+      float: left;
+    }
+    .like {
+      display: block;
+      float: right;
+      img {
+        border-radius: 0;
+        margin-top: 0px;
+        margin-right: 5px;
+        width: 38px;
+        height: 38px;
+      }
+    }
+  }
+  .comment-pic {
+    width: 578px;
+    height: 168px;
+    margin: 0 auto;
+    img {
+      margin-top: 0px;
+      border-radius: 0;
+      display: block;
+      margin-left: 15px;
+      float: left;
+      width: 178px;
+      height: 168px;
+    }
+    img:first-child {
+      margin-left: 0px;
+    }
+  }
+}
+
+.addPics {
+  position: fixed;
+  bottom: 96px;
+  width: 750px;
+  height: 240px;
+  margin: 0 auto;
+  background: white;
+  .pic {
+    position: relative;
+    float: left;
+    margin-left: 25px;
+    margin-top: 30px;
+    height: 176px;
+    width: 209px;
+    border:1px solid #4ac8da;
+    background: rgba(0,0,0,0);
+    img {
+      width: 100%;
+      height: 100%;
+    }
+    .delet {
+      position: absolute;
+      right: -18px;
+      top: -18px;
+      height: 36px;
+      width: 36px;
+      border-radius: 50%;
+      background-color: #f8ba30;
+      font-size: 42px;
+      text-align: center;
+      line-height: 30px;
+      color:white;
+    }
+  }
+  .pic:first-child {
+    margin-left: 30px;
+  }
+
+  .add {
+    float: left;
+    margin-left: 25px;
+    margin-top: 30px;
+    height: 176px;
+    width: 209px;
+    border:1px dashed #4ac8da;
+    background: rgba(0,0,0,0);
+    text-align: center;
+    line-height: 164px;
+    font-size: 100px;
+    color: #4ac8da;
+    font-weight: 100;
+    input { 
+      position: absolute;
+      opacity: 0;
+      display: block;
+      height: 164px;
+      width: 202px;
+    }
+  }
+}
+.bottom {
+  position: fixed;
+  bottom: 0px;
+  width: 750px;
+  height: 96px;
+  background-color: #97eaf5;
+  img {
+    width: 50px;
+    margin-left: 30px;  
+    margin-right: 20px;
+  }
+  input {
+    position: absolute;
+    top: 21px;
+    margin: 0;
+    border:0;
+    padding: 0;
+    width: 460px;
+    height: 54px;
+    background-color: white;
+    border-radius: 10px;
+    outline: none;
+  }
+  button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 143px;
+    height: 57px;
+    padding: 0;
+    margin: 0;
+    border:0;
+    font-size: 30px;
+    color: white;
+    text-align: center;
+    background: url("../img/comment-btu.png");
+    background-size: 100%; 
+  }
+}
+

@@ -1,0 +1,64 @@
+html {
+  font-family: HYXiaoMaiTiJ,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  margin-top: 1.706667rem;
+  width: 10rem;
+  height: 16.08rem;
+  background: url(../img/bg3.png);
+  background-repeat: repeat-y;
+  background-size: 100%;
+}
+
+.main {
+  position: absolute;
+  width: 7.573333rem;
+  top: 5.333333rem;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.main img {
+  width: 100%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 1.333333rem;
+  width: 100%;
+  background-color: #fff;
+}
+
+footer div {
+  font-size: 0.266667rem;
+  text-align: center;
+  float: left;
+  width: 25%;
+  background-color: #fff;
+}
+
+footer div a {
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  width: 100%;
+  color: #8f8f8f;
+}
+
+footer div img {
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.16rem;
+  margin-bottom: 0.133333rem;
+  height: 0.64rem;
+}
+
+footer .question a {
+  color: #54ccf9;
+}

@@ -1,0 +1,335 @@
+html {
+  font-family: HYXiaoMaiTiJ,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  margin-top: 1.706667rem;
+  width: 10rem;
+  height: 16.08rem;
+  background: url(../img/bg2.png);
+  background-repeat: repeat-y;
+  background-size: 100%;
+}
+
+.content-wp {
+  background: rgba(255,255,255,.5);
+  margin: 0 auto;
+  width: 9.2rem;
+  overflow: hidden;
+  margin-top: 0.4rem;
+  height: auto;
+  border: 0.013333rem solid #a9e4ef;
+}
+
+.content {
+  width: 8.666667rem;
+  margin: 0 auto;
+  border-bottom: 0.013333rem solid #d6e4e7;
+}
+
+.content .content-top {
+  background-color: rgba(0,0,0,0);
+  margin-top: 0.253333rem;
+  width: 100%;
+  height: 0.933333rem;
+  line-height: 0.666667rem;
+}
+
+.content .content-top .userPic {
+  float: left;
+  display: block;
+  box-sizing: border-box;
+  margin: 0;
+  margin-right: 0.266667rem;
+  width: 0.933333rem;
+  height: 0.933333rem;
+  border: 0.013333rem solid #a9e4ef;
+  border-radius: 50%;
+}
+
+.content .content-top .userName {
+  display: block;
+  font-size: 0.373333rem;
+  color: #889192;
+}
+
+.content .content-top .userName .userSex {
+  display: inline-block;
+  background-color: #3ef39f;
+  color: #fff;
+  font-size: 0.266667rem;
+  border-radius: 0.133333rem;
+  width: 1rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  text-align: center;
+  margin-left: 0.133333rem;
+}
+
+.content .content-top .time {
+  height: 0.32rem;
+  color: #cdd6d7;
+  line-height: 0.32rem;
+  font-size: 0.32rem;
+  display: block;
+}
+
+.content .content-main {
+  background-color: rgba(0,0,0,0);
+  margin-top: 0.253333rem;
+  width: 100%;
+  height: auto;
+}
+
+.content .content-main h1 {
+  margin: 0;
+  font-size: 0.4rem;
+  color: #333;
+}
+
+.content .content-main p {
+  margin: 0 auto;
+  margin-top: 0.266667rem;
+  width: 8.666667rem;
+  height: auto;
+  line-height: 0.48rem;
+  font-size: 0.32rem;
+  color: #525758;
+}
+
+.content .content-pic {
+  width: 8.666667rem;
+  height: 2.24rem;
+  background-color: rgba(0,0,0,0);
+  margin: 0 auto;
+  margin-top: 0.266667rem;
+  margin-bottom: 0.4rem;
+}
+
+.content .content-pic img {
+  display: block;
+  margin-left: 0.2rem;
+  float: left;
+  width: 2.746667rem;
+  height: 2.24rem;
+}
+
+.content .content-pic img:first-child {
+  margin-left: 0;
+}
+
+.comment {
+  overflow: hidden;
+  width: 8.666667rem;
+  height: auto;
+  margin: 0 auto;
+}
+
+.comment img {
+  float: left;
+  display: block;
+  width: 0.733333rem;
+  height: 0.733333rem;
+  border-radius: 50%;
+  margin-top: 0.4rem;
+}
+
+.comment .commentText {
+  border-bottom: 0.013333rem solid #d6e4e7;
+  float: right;
+  width: 7.706667rem;
+  margin-top: 0.533333rem;
+  height: auto;
+}
+
+.comment .commentText .userName {
+  display: block;
+  font-size: 0.373333rem;
+  color: #889192;
+}
+
+.comment .commentText .userName .userSex {
+  display: inline-block;
+  background-color: #2fbeff;
+  color: #fff;
+  font-size: 0.266667rem;
+  border-radius: 0.133333rem;
+  width: 1rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  text-align: center;
+  margin-left: 0.133333rem;
+}
+
+.comment .comment-main {
+  margin-top: 0.266667rem;
+  width: 100%;
+  height: auto;
+}
+
+.comment .comment-main p {
+  margin: 0 auto;
+  margin-top: 0.266667rem;
+  width: 7.706667rem;
+  height: auto;
+  line-height: 0.48rem;
+  font-size: 0.32rem;
+  color: #525758;
+}
+
+.comment .comment-bottom {
+  height: 0.533333rem;
+  width: 7.706667rem;
+  margin: 0.266667rem auto;
+  color: #cdd6d7;
+  line-height: 0.666667rem;
+  font-size: 0.32rem;
+}
+
+.comment .comment-bottom .time {
+  display: block;
+  float: left;
+}
+
+.comment .comment-bottom .like {
+  display: block;
+  float: right;
+}
+
+.comment .comment-bottom .like img {
+  border-radius: 0;
+  margin-top: 0;
+  margin-right: 0.066667rem;
+  width: 0.506667rem;
+  height: 0.506667rem;
+}
+
+.comment .comment-pic {
+  width: 7.706667rem;
+  height: 2.24rem;
+  margin: 0 auto;
+}
+
+.comment .comment-pic img {
+  margin-top: 0;
+  border-radius: 0;
+  display: block;
+  margin-left: 0.2rem;
+  float: left;
+  width: 2.373333rem;
+  height: 2.24rem;
+}
+
+.comment .comment-pic img:first-child {
+  margin-left: 0;
+}
+
+.addPics {
+  position: fixed;
+  bottom: 1.28rem;
+  width: 10rem;
+  height: 3.2rem;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.addPics .pic {
+  position: relative;
+  float: left;
+  margin-left: 0.333333rem;
+  margin-top: 0.4rem;
+  height: 2.346667rem;
+  width: 2.786667rem;
+  border: 0.013333rem solid #4ac8da;
+  background: rgba(0,0,0,0);
+}
+
+.addPics .pic img {
+  width: 100%;
+  height: 100%;
+}
+
+.addPics .pic .delet {
+  position: absolute;
+  right: -0.24rem;
+  top: -0.24rem;
+  height: 0.48rem;
+  width: 0.48rem;
+  border-radius: 50%;
+  background-color: #f8ba30;
+  font-size: 0.56rem;
+  text-align: center;
+  line-height: 0.4rem;
+  color: #fff;
+}
+
+.addPics .pic:first-child {
+  margin-left: 0.4rem;
+}
+
+.addPics .add {
+  float: left;
+  margin-left: 0.333333rem;
+  margin-top: 0.4rem;
+  height: 2.346667rem;
+  width: 2.786667rem;
+  border: 0.013333rem dashed #4ac8da;
+  background: rgba(0,0,0,0);
+  text-align: center;
+  line-height: 2.186667rem;
+  font-size: 1.333333rem;
+  color: #4ac8da;
+  font-weight: 100;
+}
+
+.addPics .add input {
+  position: absolute;
+  opacity: 0;
+  display: block;
+  height: 2.186667rem;
+  width: 2.693333rem;
+}
+
+.bottom {
+  position: fixed;
+  bottom: 0;
+  width: 10rem;
+  height: 1.28rem;
+  background-color: #97eaf5;
+}
+
+.bottom img {
+  width: 0.666667rem;
+  margin-left: 0.4rem;
+  margin-right: 0.266667rem;
+}
+
+.bottom input {
+  position: absolute;
+  top: 0.28rem;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  width: 6.133333rem;
+  height: 0.72rem;
+  background-color: #fff;
+  border-radius: 0.133333rem;
+  outline: 0;
+}
+
+.bottom button {
+  position: absolute;
+  bottom: 0.266667rem;
+  right: 0.266667rem;
+  width: 1.906667rem;
+  height: 0.76rem;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 0.4rem;
+  color: #fff;
+  text-align: center;
+  background: url(../img/comment-btu.png);
+  background-size: 100%;
+}

@@ -1,0 +1,169 @@
+html {
+  font-family: HYXiaoMaiTiJ,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  margin-top: 1.706667rem;
+  width: 10rem;
+  height: 16.08rem;
+  background: url(../img/bg2.png);
+  background-repeat: repeat-y;
+  background-size: 100%;
+}
+
+div {
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 9.2rem;
+  background: rgba(255,255,255,.5);
+  border-radius: 0.133333rem;
+}
+
+.content {
+  width: 9.2rem;
+  margin: 0 auto;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  background: rgba(255,255,255,.5);
+  margin-top: 0.4rem;
+  min-height: 2.666667rem;
+  border: 0.013333rem solid #a9e4ef;
+}
+
+.content .content-top {
+  background-color: rgba(0,0,0,0);
+  margin-top: 0.253333rem;
+  width: 100%;
+  height: 0.933333rem;
+  line-height: 0.933333rem;
+}
+
+.content .content-top .userPic {
+  float: left;
+  display: block;
+  box-sizing: border-box;
+  margin: 0 0.253333rem;
+  width: 0.933333rem;
+  height: 0.933333rem;
+  border: 0.013333rem solid #a9e4ef;
+  border-radius: 50%;
+}
+
+.content .content-top .userName {
+  display: block;
+  float: left;
+  font-size: 0.373333rem;
+  color: #889192;
+}
+
+.content .content-top .arrow {
+  display: block;
+  float: right;
+  height: 0.4rem;
+  margin-top: 0.266667rem;
+  margin-right: 0.266667rem;
+}
+
+.content .content-main {
+  background-color: rgba(0,0,0,0);
+  margin-top: 0.253333rem;
+  width: 100%;
+  height: 1.173333rem;
+}
+
+.content .content-main h1 {
+  margin: 0;
+  margin-left: 0.266667rem;
+  font-size: 0.4rem;
+  color: #333;
+}
+
+.content .content-main p {
+  margin: 0 auto;
+  width: 8.666667rem;
+  height: 0.506667rem;
+  line-height: 0.48rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 0.32rem;
+  color: #889192;
+}
+
+.content .content-bottom {
+  height: 0.32rem;
+  width: 8.666667rem;
+  margin: 0.266667rem auto;
+  background-color: rgba(0,0,0,0);
+  color: #cdd6d7;
+  line-height: 0.32rem;
+  font-size: 0.32rem;
+  margin-bottom: 0.266667rem;
+}
+
+.content .content-bottom .time {
+  display: block;
+  float: left;
+}
+
+.content .content-bottom .comment {
+  display: block;
+  float: right;
+}
+
+.content .content-pic {
+  width: 8.666667rem;
+  height: 2.24rem;
+  background-color: rgba(0,0,0,0);
+  margin: 0 auto;
+}
+
+.content .content-pic img {
+  display: block;
+  margin-left: 0.2rem;
+  float: left;
+  width: 2.746667rem;
+  height: 2.24rem;
+}
+
+.content .content-pic img:first-child {
+  margin-left: 0;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 1.333333rem;
+  width: 100%;
+  background-color: #fff;
+}
+
+footer div {
+  font-size: 0.266667rem;
+  text-align: center;
+  float: left;
+  width: 25%;
+}
+
+footer div a {
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  width: 100%;
+  color: #8f8f8f;
+}
+
+footer div img {
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.16rem;
+  margin-bottom: 0.133333rem;
+  height: 0.64rem;
+}
+
+footer .search a {
+  color: #54ccf9;
+}

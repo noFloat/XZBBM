@@ -1,0 +1,224 @@
+html {
+  font-family: HYXiaoMaiTiJ,"Helvetica Neue",Helvetica,Arial,"Microsoft YaHei",sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  margin-top: 1.706667rem;
+  width: 10rem;
+  height: 16.08rem;
+  background: url(../img/bg3.png);
+  background-repeat: repeat-y;
+  background-size: 100%;
+}
+
+div {
+  height: 0.866667rem;
+  width: 1.6rem;
+  background: rgba(134,225,239,.9);
+  border-radius: 0.133333rem;
+}
+
+.title {
+  width: 9.466667rem;
+  height: 1.093333rem;
+  margin: 0.4rem auto;
+}
+
+.title input {
+  float: right;
+  font-size: 0.4rem;
+  color: #fff;
+  margin: 0;
+  width: 9.2rem;
+  height: 1.093333rem;
+  border: 0;
+  background-color: rgba(0,0,0,0);
+  outline: 0;
+  padding: 0;
+}
+
+.title input::-webkit-input-placeholder {
+  color: #fff;
+}
+
+.describe {
+  width: 9.466667rem;
+  height: 3.066667rem;
+  margin: 0.4rem auto;
+  margin-bottom: 0.133333rem;
+}
+
+.describe textarea {
+  float: right;
+  font-size: 0.4rem;
+  color: #fff;
+  margin: 0;
+  width: 9.2rem;
+  height: 3.066667rem;
+  border: 0;
+  background-color: rgba(0,0,0,0);
+  outline: 0;
+  padding: 0;
+  resize: none;
+}
+
+.describe textarea::-webkit-input-placeholder {
+  color: #fff;
+}
+
+.tips {
+  width: 10rem;
+  height: 4.866667rem;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,0);
+}
+
+.tips p {
+  height: 0.866667rem;
+  width: 3.2rem;
+  float: left;
+  margin-left: 0.266667rem;
+  font-size: 0.32rem;
+  color: #2ea1ed;
+}
+
+.tip {
+  float: left;
+  background-color: rgba(217,248,251,.5);
+  color: #2ea1ed;
+  border: 0.013333rem solid #76c6fc;
+  margin-top: 0.266667rem;
+  margin-left: 0.266667rem;
+  font-size: 0.373333rem;
+  line-height: 0.866667rem;
+  text-align: center;
+}
+
+.click {
+  background-color: rgba(118,198,252,.7);
+  color: #fff;
+}
+
+hr {
+  display: block;
+  width: 9.466667rem;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  border-top: 0.013333rem solid #91e4ed;
+}
+
+.addPics {
+  width: 9.466667rem;
+  height: 2.186667rem;
+  margin: 0.333333rem auto;
+  background: rgba(0,0,0,0);
+}
+
+.addPics .pic {
+  position: relative;
+  float: left;
+  margin-left: 0.533333rem;
+  height: 2.186667rem;
+  width: 2.693333rem;
+  border: 0.013333rem solid #4ac8da;
+  background: rgba(0,0,0,0);
+}
+
+.addPics .pic img {
+  width: 100%;
+  height: 100%;
+}
+
+.addPics .pic .delet {
+  position: absolute;
+  right: -0.24rem;
+  top: -0.24rem;
+  height: 0.48rem;
+  width: 0.48rem;
+  border-radius: 50%;
+  background-color: #f8ba30;
+  font-size: 0.56rem;
+  text-align: center;
+  line-height: 0.4rem;
+  color: #fff;
+}
+
+.addPics .pic:first-child {
+  margin-left: 0;
+}
+
+.addPics .add {
+  float: left;
+  margin-left: 0.533333rem;
+  height: 2.186667rem;
+  width: 2.693333rem;
+  border: 0.013333rem dashed #4ac8da;
+  background: rgba(0,0,0,0);
+  text-align: center;
+  line-height: 2.186667rem;
+  font-size: 1.333333rem;
+  color: #4ac8da;
+  font-weight: 100;
+}
+
+.addPics .add input {
+  position: absolute;
+  opacity: 0;
+  display: block;
+  height: 2.186667rem;
+  width: 2.693333rem;
+}
+
+button {
+  display: block;
+  margin: 0 auto;
+  width: 9.173333rem;
+  height: 1.2rem;
+  border: 0;
+  padding: 0;
+  outline: 0;
+  background-color: rgba(0,0,0,0);
+  font-size: 0.453333rem;
+  color: #fff;
+  background-image: url(../img/issueBtu.png);
+  background-size: 100%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  height: 1.333333rem;
+  width: 100%;
+  background-color: #fff;
+}
+
+footer div {
+  font-size: 0.266667rem;
+  text-align: center;
+  float: left;
+  width: 25%;
+  background-color: #fff;
+}
+
+footer div a {
+  text-decoration: none;
+  display: block;
+  height: 100%;
+  width: 100%;
+  color: #8f8f8f;
+}
+
+footer div img {
+  display: block;
+  margin: 0 auto;
+  margin-top: 0.16rem;
+  margin-bottom: 0.133333rem;
+  height: 0.64rem;
+}
+
+footer .question a {
+  color: #54ccf9;
+}
