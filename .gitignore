@@ -28,3 +28,4 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 .idea/
 upload/*
 !upload/index.html
+/application/config/database.php
