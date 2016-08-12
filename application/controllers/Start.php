@@ -35,8 +35,7 @@ class Start extends CI_Controller{
     }
 
     public function login(){
-        $this->load->helper('url');
-        $this->load->view('Start/sign');
+        $this->load->view('sign');
     }
 
     public function doLogin() {

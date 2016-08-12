@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  
 	<title>学长学姐帮帮忙</title>
-	<link rel="stylesheet" href="static/css/sign.debug.css">
+	<link rel="stylesheet" href="<?php echo base_url('static/css/sign.debug.css'); ?>">
 	<style>
 		@media screen and (min-width:320px) {
 			    html {
@@ -36,15 +36,15 @@
 </head>
 <body>
 	<div class="mainPic">
-		<img src="static/img/mainPic.png" alt="">
+		<img src="<?php echo base_url('static/img/mainPic.png'); ?>" alt="">
 	</div>
 	<form action="">
 		<div class="user">
-			<img src="static/img/people.png" alt="">
+			<img src="<?php echo base_url('static/img/people.png');?>" alt="">
 			<input id = "user" type="text" placeholder="姓名">
 		</div>
 		<div class="pwd">
-			<img src="static/img/lock.png" alt="">
+			<img src="<?php echo base_url('static/img/lock.png');?>" alt="">
 			<input id = "pwd" type="text" placeholder="考生号后6位">
 		</div>
 		<p>
@@ -59,5 +59,5 @@
 </body>
 <script src="http://a.alipayobjects.com/??amui/zepto/1.1.3/zepto.js,static/fastclick/1.0.6/fastclick.min.js"></script>
 <script>FastClick.attach(document.body);</script>
-<script src= "static/js/sign.js"></script>
+<script src= "<?php echo base_url('static/js/sign.js');?>"></script>
 </html>
