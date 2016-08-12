@@ -67,7 +67,7 @@ class Start extends CI_Controller{
             echo '</h1>';
             exit;
         }
-        redirect('./index.php/start/index');
+        redirect(base_url('index.php/start/index'));
 
     }
 
