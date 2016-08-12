@@ -56,7 +56,7 @@ class Start extends CI_Controller{
 
     }
 
-    public function wexin(){
+    public function weixin(){
         if(empty($_REQUEST['code']) || empty($_REQUEST['state'])){
             ajax(array('msg' => 'unauthorized'));
         }
