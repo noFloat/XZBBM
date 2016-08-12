@@ -24,6 +24,6 @@ class Welcome extends CI_Controller {
 //            redirect('/index.php/start/index');
 //            exit;
 //        }
-        $this->load->view('home');
+        $this->load->view('index');
     }
 }

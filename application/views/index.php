@@ -169,7 +169,7 @@
 	</div>
 	<footer>
 		<div class="index">
-			<a href="index.html">
+			<a href="index.php">
 				<img src="static/img/index-icon-c.png" alt="">
 				首页
 			</a>
