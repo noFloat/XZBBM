@@ -105,6 +105,7 @@ class Discuss_model extends CI_Model{
             $replies = $this->getReplyStuId($stuId);
             $user['reply_count'] = count($replies);
             $user['is_senior'] = false;
+            $user['headImg'] = $user['head_url'];
         }else{
             $result = $this->db->get_where('senior', array('stu_id' => $stuId));
             $user = $result->row_array();
@@ -113,6 +114,8 @@ class Discuss_model extends CI_Model{
             $user['is_senior'] = true;
             $replies = $this->getReplyStuId($stuId);
             $user['reply_count'] = count($replies);
+            $user['headImg'] = base_url('upload/volunteer/').$user['photo'];
+            $user['gender'] = $user['sex'];
         }
         $user['is_junior'] = is_junior($stuId);
         return $user;

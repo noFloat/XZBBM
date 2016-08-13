@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  
 	<title>学长学姐帮帮忙</title>
-	<link rel="stylesheet" href="<?php echo base_url('static/css/userDetail.debug.css');?>">
+	<link rel="stylesheet" href="<?php echo base_url('static/css/userH.debug.css');?>">
 	<style>
 		@media screen and (min-width:320px) {
 		    html {
@@ -67,12 +67,18 @@
         ?>
 	</div>
 	<div class="myAnswer">
+        <a href="searchResult.php" class = "myQuestion">
+            <img src="<?php echo base_url('static/img/myQuestion.png');?>" alt="">提问
+            <span><img src="<?php echo base_url('static/img/arrow-r.png');?>" alt=""></span>
+            <label>6</label>
+        </a>
 		<a href="searchResult.php">
-			<img src="static/img/teacher.png" alt="">我的回答
-			<span><img src="static/img/arrow-r.png" alt=""></span>	
-			<label>5</label>
+			<img src="<?php echo base_url('static/img/teacher.png');?>" alt="">我的回答
+			<span><img src="<?php echo base_url('static/img/arrow-r.png')?>" alt=""></span>
+			<label><?php echo $render['reply_count'];?></label>
 		</a>
 	</div>
+<?php include './application/views/footer.php'?>
 </body>
 <script src="http://a.alipayobjects.com/??amui/zepto/1.1.3/zepto.js,static/fastclick/1.0.6/fastclick.min.js"></script>
 <script>FastClick.attach(document.body);</script>
