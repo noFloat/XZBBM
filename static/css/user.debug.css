@@ -52,7 +52,8 @@ body {
 }
 
 .mainMessage {
-  height: 2.32rem;
+  overflow: hidden;
+  height: auto;
   width: 9.2rem;
   background-color: rgba(255,255,255,.5);
   margin: 0.733333rem auto;
@@ -93,8 +94,38 @@ body {
   color: #7e8787;
 }
 
+.mainMessage .teacher {
+  height: 1.146667rem;
+  width: 8.64rem;
+  margin: 0 auto;
+  border-bottom: 0.013333rem solid #d2e5ed;
+}
+
+.mainMessage .teacher label {
+  float: right;
+  color: #7e8787;
+}
+
+.mainMessage .userDetail {
+  overflow: hidden;
+  height: auto;
+  width: 8.64rem;
+  margin: 0 auto;
+}
+
+.mainMessage .userDetail p {
+  margin: 0;
+  font-size: 0.32rem;
+  line-height: 0.4rem;
+  color: #474c4b;
+  width: 8.64rem;
+  height: auto;
+  margin-bottom: 0.266667rem;
+}
+
 .myAnswer {
-  height: 2.306667rem;
+  overflow: hidden;
+  height: auto;
   width: 9.2rem;
   background-color: rgba(255,255,255,.5);
   margin: 0.4rem auto;
