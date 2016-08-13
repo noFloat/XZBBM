@@ -39,7 +39,7 @@
 		<img class= "userPic" src="<?php echo $render['headImg'];?>" alt="">
 		<div class="text">
 			<span class = "userName"><?php echo $render['name'];?></span>
-			<label class = "userSex"><?php if($render['is_junior']){echo '萌新';}else{if($render['gender'] == '男'){echo '学长';}else{echo '学姐';}} ?></label>
+			<label class = "userSex"><?php if($render['is_junior']){echo '萌新';}else{if('男' == trim($render['gender'])){echo '学长';}else{echo '学姐';}} ?></label>
 		</div>
 	</div>
 	<div class="mainMessage">
