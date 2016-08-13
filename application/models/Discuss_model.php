@@ -27,7 +27,7 @@ class Discuss_model extends CI_Model{
         $like = array('tag' => $tag);
         $this->db->like($like);
         $this->db->order_by('create_time', 'DESC');
-        $result = $this->db->get($this->table);
+        $result = $this->db->get_where($this->table, array('pid' => 0));
 //        dump($this->db->get_compiled_select($this->table));
         return $this->filter($result->result_array());
     }
@@ -36,7 +36,7 @@ class Discuss_model extends CI_Model{
         $like = array('content' => $word);
         $this->db->like($like);
         $this->db->order_by('create_time', 'DESC');
-        $result = $this->db->get($this->table);
+        $result = $this->db->get_where($this->table, array('pid' => 0));
 //        dump($this->db->get_compiled_select($this->table));
         return $this->filter($result->result_array());
     }
@@ -94,7 +94,8 @@ class Discuss_model extends CI_Model{
     }
 
     public function showUser($stuId){
-        if(is_junior($stuId)){
+
+        if(!$this->isSenior($stuId)){
             $result = $this->db->get_where('junior', array('stu_id' => $stuId));
             $user = $result->row_array();
             if(empty($user))
@@ -103,11 +104,13 @@ class Discuss_model extends CI_Model{
             $user['question_count'] = count($questions);
             $replies = $this->getReplyStuId($stuId);
             $user['reply_count'] = count($replies);
+            $user['is_senior'] = false;
         }else{
             $result = $this->db->get_where('senior', array('stu_id' => $stuId));
             $user = $result->row_array();
             if(empty($user))
                 return null;
+            $user['is_senior'] = true;
             $replies = $this->getReplyStuId($stuId);
             $user['reply_count'] = count($replies);
         }
@@ -153,6 +156,7 @@ class Discuss_model extends CI_Model{
             $value['pic_name'] = explode("#", $value['pic_name']);
             $value['tag'] = explode(",", $value['tag']);
             $value['time'] = formatTime(strtotime($value['create_time']));
+            $value['is_like'] = in_array($_SESSION['userInfo']['stuNum'], explode(',', $value['like_it']))?true:false;
             $result_f[] = $value;
         }
         return $result_f;
@@ -182,6 +186,11 @@ class Discuss_model extends CI_Model{
     private function getReplyStuId($stuId){
         $result = $this->db->get_where($this->table, array('author_id' => $stuId, 'pid >' => 0));
         return $result->result_array();
+    }
+
+    public function isSenior($stuId){
+        $result = $this->db->get_where('senior', array('stu_id' => $stuId));
+        return $result->row();
     }
 
     private function getCommentCount($id){

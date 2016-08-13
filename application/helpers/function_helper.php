@@ -127,8 +127,9 @@ function param($name){
  * @return string
  */
 function get_base_upload($data){
-    $prefix = 'data:image/png;base64,';
-    return substr($data, strlen($prefix) - 1);
+//    $prefix = 'data:image/png;base64,';
+//    return substr($data, strlen($prefix) - 1);
+    return $data;
 }
 
 /**

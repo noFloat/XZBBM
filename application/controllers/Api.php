@@ -11,10 +11,11 @@ class Api extends CI_Controller{
 
     public function __construct() {
         //TODO:记得取消注释
-        if(!checkLogin()){
-            redirect('index.php');
-        }
+//        if(!checkLogin()){
+//            redirect('index.php');
+//        }
         parent::__construct();
+        session_start();
     }
 
     public function showImg($name){
@@ -65,6 +66,7 @@ class Api extends CI_Controller{
     }
 
     public function search($type = 'tag', $query = ""){
+        $query = urldecode($query);
         if($type == 'tag'){
             $tag = $query;
             $this->load->model('discuss_model');

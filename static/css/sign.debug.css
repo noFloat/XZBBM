@@ -24,11 +24,11 @@ body {
   height: 100%;
 }
 
-form {
+.form {
   width: 100%;
 }
 
-form img {
+.form img {
   display: inline-block;
   width: 0.64rem;
   height: 0.64rem;
@@ -36,7 +36,7 @@ form img {
   margin-left: 0.266667rem;
 }
 
-form .user {
+.form .user {
   margin: 0 auto;
   width: 8.453333rem;
   height: 1.146667rem;
@@ -45,7 +45,7 @@ form .user {
   background-color: rgba(137,224,239,.5);
 }
 
-form input {
+.form input {
   float: right;
   font-size: 0.373333rem;
   color: #a6a6a6;
@@ -59,7 +59,7 @@ form input {
   padding: 0;
 }
 
-form .pwd {
+.form .pwd {
   margin: 0 auto;
   width: 8.453333rem;
   height: 1.146667rem;
@@ -68,14 +68,14 @@ form .pwd {
   background-color: rgba(137,224,239,.5);
 }
 
-form p {
+.form p {
   color: #50cde4;
   font-size: 0.32rem;
   width: 7.693333rem;
   margin-left: 1.173333rem;
 }
 
-form button {
+.form button {
   display: block;
   margin: 0 auto;
   width: 8.48rem;

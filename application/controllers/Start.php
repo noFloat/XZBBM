@@ -25,18 +25,23 @@ class Start extends CI_Controller{
 
     public function __construct() {
         parent::__construct();//TODO 添加登录验证
+        session_start();
+        $_SESSION['openid'] = 'ouRCyjrHGCXiA2OGYbucjLMBka1g';
+        $this->on_weixin();
     }
 
-    public function index() {
-        if(empty($_SESSION['openid'])){
-            redirect($this->getAuthUrl());
-            exit;
-        }
+    private function auth() {
         if(empty($_SESSION['isLogin'])){
             redirect(base_url('index.php/start/login'));
             exit;
         }
-        $this->load->view('index');
+    }
+
+    private function on_weixin(){
+        if(empty($_SESSION['openid'])){
+            redirect($this->getAuthUrl());
+            exit;
+        }
     }
 
     public function login(){
@@ -44,6 +49,8 @@ class Start extends CI_Controller{
     }
 
     public function doLogin() {
+        if(empty($_POST['stuNum']) || empty($_POST['idNum']))
+            ajax(retData(400, '请填写账号和密码'));
         $username = $_POST['stuNum'];
         $password = $_POST['idNum'];
         $data = array(
@@ -62,12 +69,14 @@ class Start extends CI_Controller{
     }
 
     public function weixin(){
+        //TODO:取消注释
         if(empty($_REQUEST['code']) || empty($_REQUEST['state'])){
             ajax(array('msg' => 'unauthorized'));
         }
         $openId = $this->getOpenId($_REQUEST['code']);
+//        $openId = 'ouRCyjrHGCXiA2OGYbucjLMBka1g';//TODO:记得删除
         if(!$this->isSubscribe($openId)){
-            redirect('http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Bind/Bind/bind');
+            //redirect('http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Bind/Bind/bind');
             echo '<h1>';
             echo '请先关注小帮手<^_^>';
             echo '</h1>';
@@ -76,6 +85,75 @@ class Start extends CI_Controller{
         $_SESSION['openid'] = $openId;
         redirect(base_url('index.php/start/index'));
 
+    }
+
+    public function user($stuId = '') {
+        $this->load->model('discuss_model');
+        if(empty($stuId)){
+            $result = $this->discuss_model->showUser($_SESSION['userInfo']['stuNum']);
+            $this->load->view('userDetail', array('render' => $result));
+        }else{
+            $result = $this->discuss_model->showUser($stuId);
+            if(empty($result)){
+                ajax(retData(404, '未找到此用户'));
+            }
+            $this->load->view('userDetail', array('render' => $result));
+        }
+    }
+
+    public function index($by = '最新问题', $page = 1, $limit = 5){
+        $by = urldecode($by);
+        if($by == '最新问题'){
+            $this->load->model('discuss_model');
+            $result = $this->discuss_model->getByNew($page, $limit);
+            $this->load->view('index', array('render' => $result));
+            return;
+        }
+//        if($by == '最热问题'){
+//            $this->load->model('discuss_model');
+//            $result = $this->discuss_model->getByHot($page, $limit);
+//            ajax($result);
+//        }
+        ajax(retData(404, '没有改类别'));
+    }
+
+    public function question(){
+        $this->load->view('question');
+    }
+
+    public function search(){
+        $this->load->view('search');
+    }
+
+    public function searchResult($type = 'tag', $query = ""){
+        if($type == 'tag'){
+            $tag = urldecode($query);
+            $this->load->model('discuss_model');
+            $result = $this->discuss_model->searchByTag($tag);
+            $this->load->view('searchResult', array('render' => $result));
+            return;
+        }
+        if($type == 'word'){
+            $word = urldecode($query);
+            $this->load->model('discuss_model');
+            $result = $this->discuss_model->searchByWord($word);
+            $this->load->view('searchResult', array('render' => $result));
+            return;
+        }
+        ajax(retData('404', 'unknown type'));
+    }
+
+    public function detail($id){
+        if(empty($id)){
+            ajax(retData(400, '错误的问题id'));
+        }
+        $id = intval($id);
+        $this->load->model('discuss_model');
+        $result = $this->discuss_model->showQuestion($id);
+        if(empty($result)){
+            ajax(retData(400, '错误的问题id'));
+        }
+        $this->load->view('detail', array('render' => $result));
     }
 
     private function getOpenId($code){
@@ -113,11 +191,8 @@ class Start extends CI_Controller{
 
     //userType 1 2016级 2 志愿学长 3 其他
     private function loginSuccess($userData) {
-        $_SESSION['userInfo'] = $userData;
+        $_SESSION['userInfo'] = object_to_array($userData);
         $_SESSION['isLogin'] = true;
-        if("2016" == $userData->grade){
-
-        }
         $this->load->model('senior_model');
         $senior = $this->senior_model->isSenior($userData->stuNum);
         if($senior){

@@ -17,7 +17,7 @@ window.onload = function () {
 			document.querySelectorAll('.comment')[i].addEventListener('click',function(e){
 			if (e.target.className == "likePic") {
 					document.querySelectorAll('.like')[i].innerHTML = '<img class = "likePic click" src="static/img/like.png" alt="">' + (parseInt(document.querySelectorAll('.like')[i].innerText) + 1);
-				} else if (e.target.className == "likePic click"){			
+				} else if (e.target.className == "likePic click"){
 					document.querySelectorAll('.like')[i].innerHTML = '<img class = "likePic" src="static/img/dislike.png" alt="">' + (parseInt(document.querySelectorAll('.like')[i].innerText) - 1);
 				}
 				/*
