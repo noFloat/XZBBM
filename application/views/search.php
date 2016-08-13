@@ -107,11 +107,6 @@
 		document.querySelector('input').addEventListener('keyup',function (event) {
 			if (event.keyCode == 13) {
 				var keyWord = document.querySelector('input').value;
-				(function () {
-					for (var i = clicks.length - 1; i >= 0; i--) {
-						clicked[i] = clicks[i].innerHTML;
-					}
-				})();
 				window.location = '<?php echo base_url('index.php/start/searchResult/word/'); ?>' + keyWord;
 			}
 		})
