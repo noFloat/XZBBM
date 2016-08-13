@@ -39,7 +39,7 @@
 		<img src="static/img/search-w.png" alt="">
 		<input type="text">
 	</div>
-	<div class="tip click">学习</div>
+	<div class="tip">学习</div>
 	<div class="tip">生活</div>
 	<div class="tip">考研</div>
 	<div class="tip">就业</div>
@@ -99,6 +99,7 @@
 				} else {
 					tips[i].className = "tip";
 				}
+				window.location = '<?php echo base_url('index.php/api/search/tag/'); ?>' + tips[i].innerText;
 			})
 		})(i);
 	}
@@ -106,28 +107,12 @@
 		document.querySelector('input').addEventListener('keyup',function (event) {
 			if (event.keyCode == 13) {
 				var keyWord = document.querySelector('input').value;
-				var clicks = document.querySelectorAll('.click');
-				var clicked = [];
 				(function () {
 					for (var i = clicks.length - 1; i >= 0; i--) {
 						clicked[i] = clicks[i].innerHTML;
 					}
 				})();
-				$.ajax({
-					  type: 'POST',
-					  url: '',
-					  // data to be added to query string:
-					  data: { keyword: keyWord ,tips : clicked},
-					  // type of data we are expecting in return:
-					  dataType: 'json',
-					  timeout: 300,
-					  success: function(data){
-					    
-					  },
-					  error: function(xhr, type){
-					    alert('Ajax error!')
-					  }
-				})
+				window.location = '<?php echo base_url('index.php/api/search/word/'); ?>' + keyWord;
 			}
 		})
 	})();
