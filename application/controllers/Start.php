@@ -135,7 +135,8 @@ class Start extends CI_Controller{
         $this->auth();
         if(empty($stuId))
             ajax(retData(404, '请访问正确的用户'));
-        if(!is_junior($stuId) || empty($this->discuss_model->isSenior($stuId))){
+        $isSenior = $this->discuss_model->isSenior($stuId);
+        if(!is_junior($stuId) || empty($isSenior)){
             ajax(retData('403', '你访问的用户没有回复权限'));
         }
         $result = $this->discuss_model->getReplyQuesByStuId($stuId);
