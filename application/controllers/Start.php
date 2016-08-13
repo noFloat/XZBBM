@@ -26,7 +26,7 @@ class Start extends CI_Controller{
     public function __construct() {
         parent::__construct();//TODO 添加登录验证
         session_start();
-        $_SESSION['openid'] = 'ouRCyjrHGCXiA2OGYbucjLMBka1g';
+//        $_SESSION['openid'] = 'ouRCyjrHGCXiA2OGYbucjLMBka1g';
         $this->on_weixin();
     }
 
@@ -76,7 +76,7 @@ class Start extends CI_Controller{
         $openId = $this->getOpenId($_REQUEST['code']);
 //        $openId = 'ouRCyjrHGCXiA2OGYbucjLMBka1g';//TODO:记得删除
         if(!$this->isSubscribe($openId)){
-            //redirect('http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Bind/Bind/bind');
+//            redirect('http://hongyan.cqupt.edu.cn/MagicLoop/index.php?s=/addon/Bind/Bind/bind');
             echo '<h1>';
             echo '请先关注小帮手<^_^>';
             echo '</h1>';
@@ -88,6 +88,7 @@ class Start extends CI_Controller{
     }
 
     public function user($stuId = '') {
+        $this->auth();
         $this->load->model('discuss_model');
         if(empty($stuId)){
             $result = $this->discuss_model->showUser($_SESSION['userInfo']['stuNum']);
@@ -102,6 +103,7 @@ class Start extends CI_Controller{
     }
 
     public function index($by = '最新问题', $page = 1, $limit = 5){
+        $this->auth();
         $by = urldecode($by);
         if($by == '最新问题'){
             $this->load->model('discuss_model');
@@ -118,6 +120,7 @@ class Start extends CI_Controller{
     }
 
     public function userQuestion($stuId){
+        $this->auth();
         if(empty($stuId))
             ajax(retData(404, '请访问正确的用户'));
         $this->load->model('discuss_model');
@@ -129,6 +132,7 @@ class Start extends CI_Controller{
     }
 
     public function userReply($stuId) {
+        $this->auth();
         if(empty($stuId))
             ajax(retData(404, '请访问正确的用户'));
         if(!is_junior($stuId) || empty($this->discuss_model->isSenior($stuId))){
@@ -139,6 +143,7 @@ class Start extends CI_Controller{
     }
 
     public function question(){
+        $this->auth();
         if(is_junior($_SESSION['userInfo']['stuNum'])){
             $this->load->view('question');
         }else{
@@ -147,10 +152,12 @@ class Start extends CI_Controller{
     }
 
     public function search(){
+        $this->auth();
         $this->load->view('search');
     }
 
     public function searchResult($type = 'tag', $query = ""){
+        $this->auth();
         if($type == 'tag'){
             $tag = urldecode($query);
             $this->load->model('discuss_model');
@@ -169,6 +176,7 @@ class Start extends CI_Controller{
     }
 
     public function detail($id){
+        $this->auth();
         if(empty($id)){
             ajax(retData(400, '错误的问题id'));
         }
