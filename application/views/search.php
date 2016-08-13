@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">  
 	<title>学长学姐帮帮忙</title>
-	<link rel="stylesheet" href="static/css/search.debug.css">
+	<link rel="stylesheet" href="<?php echo base_url('static/css/search.debug.css');?>">
 	<style>
 		@media screen and (min-width:320px) {
 		    html {
@@ -36,7 +36,7 @@
 </head>
 <body>
 	<div class="search-box">
-		<img src="static/img/search-w.png" alt="">
+		<img src="<?php echo base_url('static/img/search-w.png');?>" alt="">
 		<input type="text">
 	</div>
 	<div class="tip">学习</div>
@@ -57,35 +57,9 @@
 	<div class="tip">软件</div>
 	<div class="tip">外国语</div>
 	<div class="tip">国际</div>
-	<footer>
-		<div class="index">
-			<a href="index.php">
-				<img src="static/img/index-icon.png" alt="">
-				首页
-			</a>
-		</div>
-		<div class="question">
-			<a href="question.php">
-				<img src="static/img/question-icon.png" alt="">
-				提问
-			</a>
-		</div>
-		<div class="search">
-			<a href="search.php">
-				<img src="static/img/search-icon-c.png" alt="">
-				查找
-			</a>
-		</div>
-		<div class="user">
-			<a href="user.html">
-				<img src="static/img/user-icon.png" alt="">
-				个人中心
-			</a>
-		</div>
-	</footer>
-</body>
-<script src="http://a.alipayobjects.com/??amui/zepto/1.1.3/zepto.js,static/fastclick/1.0.6/fastclick.min.js"></script>
-<script>FastClick.attach(document.body);</script>
+	<?php
+	include './application/views/footer.php';
+	?>
 <script>
 	window.onload = function () {
 	// body...

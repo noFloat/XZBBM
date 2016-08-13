@@ -139,7 +139,11 @@ class Start extends CI_Controller{
     }
 
     public function question(){
-        $this->load->view('question');
+        if(is_junior($_SESSION['userInfo']['stuNum'])){
+            $this->load->view('question');
+        }else{
+            $this->load->view('questionSorry');
+        }
     }
 
     public function search(){

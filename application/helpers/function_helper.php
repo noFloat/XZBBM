@@ -124,12 +124,17 @@ function param($name){
 /**
  * 把通过base64上传的图片截取base64前缀
  * @param $data
- * @return string
+ * @return array
  */
 function get_base_upload($data){
-//    $prefix = 'data:image/png;base64,';
-//    return substr($data, strlen($prefix) - 1);
-    return $data;
+    list($type, $image) = explode(',', $data);
+    $pattern = '/^data:(.+);base64$/';
+    $mime = array();
+    preg_match($pattern, $type, $mime);
+    $result = array();
+    $result['mime'] = $mime[1];
+    $result['data'] = base64_decode($image);
+    return $result;
 }
 
 /**

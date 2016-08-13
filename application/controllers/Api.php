@@ -20,11 +20,15 @@ class Api extends CI_Controller{
 
     public function showImg($name){
         $path = './upload/';
-        if(!file_exists($name) || !check_filename($name)){
+        $file = $path.$name;
+        if(!file_exists($file) || !check_filename($name)){
             set_status_header(404);
             exit;
         }
-        echo file_get_contents($path.$name);
+        $data = file_get_contents($file);
+        $result = get_base_upload($data);
+        header('Content-Type: '.$result['mime']);
+        echo $result['data'];
     }
 
     public function addQuestion(){
@@ -39,7 +43,7 @@ class Api extends CI_Controller{
         }
         if(empty($data['content']) || mb_strlen($data['content']) > 100)
             ajax(retData(411, '问题描述大于100'));
-        if(!($tags = $this->checkTag($data['tag'])))
+        if(!($data['tag'] = $this->checkTag($data['tag'])))
             ajax(retData(412, '请添加标签'));
 //        dump($data);
         $data['pic_name'] = $this->uploadImg();

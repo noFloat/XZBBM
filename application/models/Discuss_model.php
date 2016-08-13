@@ -12,15 +12,17 @@ class Discuss_model extends CI_Model{
     private $table = 'discuss';
 
     public function add($data){
-        $ret = $this->db->insert($this->table, $data);
-        $this->incReplyCount($data['pid']);
+        if($data['pid'] != 0){
+            $this->incReplyCount($data['pid']);
+        }
+        $this->db->insert($this->table, $data);
         //dump($ret);
     }
 
     public function incReplyCount($id){
         $this->db->where(array('id' => $id));
         $ques = $this->db->get($this->table)->row_array();
-        $this->db->update($this->table, array('reply_count' => ++$ques['reply_count']));
+        $this->db->update($this->table, array('reply_count' => ++$ques['reply_count'], 'update_time' => date('Y-m-d H:i:s')));
     }
 
     public function searchByTag($tag){
@@ -43,7 +45,7 @@ class Discuss_model extends CI_Model{
 
     public function getByNew($page, $limit){
         $this->db->limit(($page - 1) * $limit, $page * $limit);
-        $this->db->order_by('create_time');
+        $this->db->order_by('create_time DESC');
         $result = $this->db->get_where($this->table, array('pid' => 0));
         return $this->filter($result->result_array());
     }
@@ -157,7 +159,7 @@ class Discuss_model extends CI_Model{
                 $value['gender'] = $userInfo['sex'];
             }
             $value['pic_name'] = explode("#", $value['pic_name']);
-            $value['tag'] = explode(",", $value['tag']);
+            $value['tag'] = explode("#", $value['tag']);
             $value['time'] = formatTime(strtotime($value['create_time']));
             $value['is_like'] = in_array($_SESSION['userInfo']['stuNum'], explode(',', $value['like_it']))?true:false;
             $result_f[] = $value;
