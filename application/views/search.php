@@ -99,7 +99,7 @@
 				} else {
 					tips[i].className = "tip";
 				}
-				window.location = '<?php echo base_url('index.php/api/searchResult/tag/'); ?>' + tips[i].innerText;
+				window.location = '<?php echo base_url('index.php/start/searchResult/tag/'); ?>' + tips[i].innerText;
 			})
 		})(i);
 	}
@@ -112,7 +112,7 @@
 						clicked[i] = clicks[i].innerHTML;
 					}
 				})();
-				window.location = '<?php echo base_url('index.php/api/searchResult/word/'); ?>' + keyWord;
+				window.location = '<?php echo base_url('index.php/start/searchResult/word/'); ?>' + keyWord;
 			}
 		})
 	})();
