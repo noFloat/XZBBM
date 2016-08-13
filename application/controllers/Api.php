@@ -18,7 +18,23 @@ class Api extends CI_Controller{
         session_start();
     }
 
+    private function auth() {
+        $this->on_weixin();
+        if(empty($_SESSION['isLogin'])){
+            redirect(base_url('index.php/start/login'));
+            exit;
+        }
+    }
+
+    private function on_weixin(){
+        if(empty($_SESSION['openid'])){
+            redirect($this->getAuthUrl());
+            exit;
+        }
+    }
+
     public function showImg($name){
+        $this->auth();
         $path = './upload/';
         $file = $path.$name;
         if(!file_exists($file) || !check_filename($name)){
@@ -32,6 +48,7 @@ class Api extends CI_Controller{
     }
 
     public function addQuestion(){
+        $this->auth();
         if($_SESSION['userType'] != 1){
             ajax(retData(401, '只允许萌新提问哦'));
         }
@@ -56,6 +73,7 @@ class Api extends CI_Controller{
     }
 
     public function reply(){
+        $this->auth();
         if($_SESSION['userType'] == 3){
             ajax(retData(401, '只允许志愿者和萌新回答哦'));
         }
@@ -70,6 +88,7 @@ class Api extends CI_Controller{
     }
 
     public function search($type = 'tag', $query = ""){
+        $this->auth();
         $query = urldecode($query);
         if($type == 'tag'){
             $tag = $query;
@@ -87,6 +106,7 @@ class Api extends CI_Controller{
     }
 
     public function getQuestion($by = '最新问题', $page = 1, $limit = 10){
+        $this->auth();
         $by = urldecode($by);
         if($by == '最新问题'){
             $this->load->model('discuss_model');
@@ -102,6 +122,7 @@ class Api extends CI_Controller{
     }
 
     public function question($id){
+        $this->auth();
         if(empty($id)){
             ajax(retData(400, '错误的问题id'));
         }
@@ -115,6 +136,7 @@ class Api extends CI_Controller{
     }
 
     public function user($stuId) {
+        $this->auth();
         if(empty($stuId)){
             ajax(retData(400, '参数错误'));
         }
@@ -127,6 +149,7 @@ class Api extends CI_Controller{
     }
 
     public function whoami(){
+        $this->auth();
 //        $_SESSION['userInfo']['stuNum'] = '2015210001';
         $stuId = $_SESSION['userInfo']['stuNum'];
         $this->load->model('discuss_model');
@@ -135,6 +158,7 @@ class Api extends CI_Controller{
     }
 
     public function like($id){
+        $this->auth();
 //        $_SESSION['userInfo']['stuNum'] = '2015210001';
         if(empty($id)){
             ajax(retData(400, '请传入id'));

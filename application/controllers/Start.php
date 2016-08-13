@@ -27,10 +27,10 @@ class Start extends CI_Controller{
         parent::__construct();//TODO 添加登录验证
         session_start();
 //        $_SESSION['openid'] = 'ouRCyjrHGCXiA2OGYbucjLMBka1g';
-        $this->on_weixin();
     }
 
     private function auth() {
+        $this->on_weixin();
         if(empty($_SESSION['isLogin'])){
             redirect(base_url('index.php/start/login'));
             exit;
@@ -45,10 +45,12 @@ class Start extends CI_Controller{
     }
 
     public function login(){
+        $this->on_weixin();
         $this->load->view('sign');
     }
 
     public function doLogin() {
+        $this->on_weixin();
         if(empty($_POST['stuNum']) || empty($_POST['idNum']))
             ajax(retData(400, '请填写账号和密码'));
         $username = $_POST['stuNum'];
