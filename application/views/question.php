@@ -99,5 +99,116 @@
 </body>
 <script src="http://a.alipayobjects.com/??amui/zepto/1.1.3/zepto.js,static/fastclick/1.0.6/fastclick.min.js"></script>
 <script>FastClick.attach(document.body);</script>
-<script src = "static/js/question.js"></script>
+<script>
+	window.onload = function () {
+	// body...
+	var tips = document.querySelectorAll('.tip');
+
+	for (var i = tips.length - 1; i >= 0; i--) {
+		(function(i){
+			tips[i].addEventListener('click',function () {
+				if (tips[i].className == "tip") {
+					tips[i].className = "tip click";
+				} else {
+					tips[i].className = "tip";
+				}
+			})
+		})(i);
+	}
+	var picture = (function(){
+		var addPic = document.querySelector('#addPic');
+		var add = document.querySelector('.add');
+		var showPic = document.querySelector('.addPics');
+		var pic = [];
+		var delets = [];
+		var display;
+		addPic.addEventListener('change', function(e){
+		    var files = this.files;
+		    if(files.length && pic.length < 3){
+			     checkPic(this.files);
+
+		    }
+		})
+		function checkPic(files){
+			var newNode = document.createElement('div');
+			newNode.className = "pic";
+			var file = files[0];
+			var reader = new FileReader();
+			// show表示<div id='show'></div>，用来展示图片预览的
+			if(!/image\/\w+/.test(file.type)){
+				newNode.innerHTML = "错误的文件类型";
+		        showPic.insertBefore(newNode,add);
+		        return false;
+		    }
+		    // onload是异步操作
+			reader.onload = function(e){
+				newNode.innerHTML = '<div class="delet">×</div><img src="'+e.target.result+'" id = "pic" alt="img">';
+				showPic.insertBefore(newNode,add);
+				pic.push(e.target.result);
+				delets = $('.delet');
+				deletPic();
+			}
+			reader.readAsDataURL(file);
+			if (pic.length >= 2) {
+		    	add.style.display = "none";
+		    }
+		}
+
+		function deletPic() {
+			display = $('.pic');
+			// delets.one('click',function(e){console.log(e)});
+			for (var i = 0; i <= delets.length - 1; i++	) {
+				(function(i){
+					delets[i].addEventListener('click',function (event) {
+						pic.splice(i,1);
+						var displays = display.toArray();
+						displays[i].remove();
+						displays.splice(i,1)
+						add.style.display = "block";
+						pic = $('.pic').toArray();
+						pic.forEach(function(item,index,array){
+							array[index] = array[index].children.pic.src;
+						})
+					})
+				})(i)
+			}
+		}
+		
+		document.querySelector('button').addEventListener('click',function (event) {
+		var title = document.querySelector('input').value;
+		var detail = document.querySelector('textarea').value;
+		var clicks = document.querySelectorAll('.click');
+		var clicked = [];
+		(function () {
+			for (var i = clicks.length - 1; i >= 0; i--) {
+				clicked[i] = clicks[i].innerHTML;
+			}
+		})();
+		$.ajax({
+			  type: 'POST',
+			  url: '<?php echo base_url('index.php/api/addQuestion'); ?>',
+			  // data to be added to query string:
+			  data: { title: title ,content : detail,tag : clicked,pic : pic},
+			  // type of data we are expecting in return:
+			  dataType: 'json',
+			  timeout: 3000,
+			  success: function(data){
+			    if(data.status == 410 ) {
+			    	alert("标题长度大于20");
+			    } else if(data.status == 411) {
+			    	alert("问题描述长度大于100")
+			    } else if(data.status == 412) {
+			    	alert("请选择标签")
+			    } else if(data.status == 200) {
+			    	window.location = '<?php echo base_url('index.php/start/index'); ?>'
+			    }
+			  },
+			  error: function(xhr, type){
+			    alert('Ajax error!')
+			  }
+			})
+		})
+	})();	
+}
+</script>
 </html>
