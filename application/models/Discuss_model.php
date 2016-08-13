@@ -165,30 +165,53 @@ class Discuss_model extends CI_Model{
         return $result_f;
     }
 
-    private function getComment($id){
+    public function getComment($id){
         $where = array('pid' => $id);
         $this->db->order_by('create_time', 'DESC');
         $result = $this->db->get_where($this->table, $where);
         return $this->filter($result->result_array());
     }
 
-    private function getById($id){
+    public function getById($id){
         $result = $this->db->get_where($this->table, array('id' => $id));
         return $result->row_array();
     }
 
-    private function getByStuId($stuId){
+    public function getByStuId($stuId){
         $result = $this->db->get_where($this->table, array('author_id' => $stuId));
         return $result->result_array();
     }
 
-    private function getQuestionByStuId($stuId){
+    public function getQuestionByStuId($stuId){
         $result = $this->db->get_where($this->table, array('author_id' => $stuId, 'pid' => 0));
         return $result->result_array();
     }
-    private function getReplyStuId($stuId){
+    public function getReplyStuId($stuId){
         $result = $this->db->get_where($this->table, array('author_id' => $stuId, 'pid >' => 0));
         return $result->result_array();
+    }
+
+    public function getUserQues($stuId){
+        $result = $this->getQuestionByStuId($stuId);
+        return $this->filter($result);
+    }
+
+    public function getReplyQuesByStuId($stuId) {
+        $reply = $this->getReplyStuId($stuId);
+        $idSet = array();
+        foreach ($reply as $value){
+            if(!in_array($value['pid'], $idSet)){
+                $idSet[] = $value['pid'];
+            }
+        }
+        $result = array();
+        foreach ($idSet as $value){
+            $resultTmp = $this->getById($value);
+            if(empty($resultTmp))
+                continue;
+            $result[] = $resultTmp;
+        }
+        return $this->filter($result);
     }
 
     public function isSenior($stuId){

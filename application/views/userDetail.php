@@ -67,16 +67,28 @@
         ?>
 	</div>
 	<div class="myAnswer">
-        <a href="searchResult.php" class = "myQuestion">
-            <img src="<?php echo base_url('static/img/myQuestion.png');?>" alt="">提问
-            <span><img src="<?php echo base_url('static/img/arrow-r.png');?>" alt=""></span>
-            <label>6</label>
-        </a>
-		<a href="searchResult.php">
-			<img src="<?php echo base_url('static/img/teacher.png');?>" alt="">我的回答
-			<span><img src="<?php echo base_url('static/img/arrow-r.png')?>" alt=""></span>
-			<label><?php echo $render['reply_count'];?></label>
-		</a>
+        <?php
+        if($render['is_junior']){
+            ?>
+            <a href="<?php echo base_url('index.php/start/userQuestion/'.$render['stu_id']) ?>" class = "myQuestion">
+                <img src="<?php echo base_url('static/img/myQuestion.png');?>" alt="">提问
+                <span><img src="<?php echo base_url('static/img/arrow-r.png');?>" alt=""></span>
+                <label><?php echo $render['question_count'];?></label>
+            </a>
+            <?php
+        }
+        ?>
+		<?php
+        if($render['is_senior']){
+		    ?>
+            <a href="<?php echo base_url('index.php/start/userReply/'.$render['stu_id']);?>">
+                <img src="<?php echo base_url('static/img/teacher.png');?>" alt="">我的回答
+                <span><img src="<?php echo base_url('static/img/arrow-r.png')?>" alt=""></span>
+                <label><?php echo $render['reply_count'];?></label>
+            </a>
+            <?php
+        }
+        ?>
 	</div>
 <?php include './application/views/footer.php'?>
 </body>

@@ -117,6 +117,27 @@ class Start extends CI_Controller{
         ajax(retData(404, '没有改类别'));
     }
 
+    public function userQuestion($stuId){
+        if(empty($stuId))
+            ajax(retData(404, '请访问正确的用户'));
+        $this->load->model('discuss_model');
+        if(!is_junior($stuId)){
+            ajax(retData('403', '你不是萌新，坏人'));
+        }
+        $result = $this->discuss_model->getUserQues($stuId);
+        $this->load->view('searchResult', array('render' => $result));
+    }
+
+    public function userReply($stuId) {
+        if(empty($stuId))
+            ajax(retData(404, '请访问正确的用户'));
+        if(!is_junior($stuId) || empty($this->discuss_model->isSenior($stuId))){
+            ajax(retData('403', '你访问的用户没有回复权限'));
+        }
+        $result = $this->discuss_model->getReplyQuesByStuId($stuId);
+        $this->load->view('searchResult', array('render', $result));
+    }
+
     public function question(){
         $this->load->view('question');
     }
