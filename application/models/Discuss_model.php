@@ -12,9 +12,10 @@ class Discuss_model extends CI_Model{
     private $table = 'discuss';
 
     public function add($data){
-        if($data['pid'] != 0){
+        if($data['pid'] != '0'){
             $this->incReplyCount($data['pid']);
         }
+        $data['update_time'] = date('Y-m-d H:i:s');
         $this->db->insert($this->table, $data);
         return $this->db->insert_id();
         //dump($ret);
@@ -23,13 +24,14 @@ class Discuss_model extends CI_Model{
     public function incReplyCount($id){
         $this->db->where(array('id' => $id));
         $ques = $this->db->get($this->table)->row_array();
+        $this->db->where(array('id' => $id));
         $this->db->update($this->table, array('reply_count' => ++$ques['reply_count'], 'update_time' => date('Y-m-d H:i:s')));
     }
 
     public function searchByTag($tag){
         $like = array('tag' => $tag);
         $this->db->like($like);
-        $this->db->order_by('create_time', 'DESC');
+        $this->db->order_by('update_time', 'DESC');
         $result = $this->db->get_where($this->table, array('pid' => 0));
 //        dump($this->db->get_compiled_select($this->table));
         return $this->filter($result->result_array());
@@ -38,7 +40,7 @@ class Discuss_model extends CI_Model{
     public function searchByWord($word){
         $like = array('content' => $word);
         $this->db->like($like);
-        $this->db->order_by('create_time', 'DESC');
+        $this->db->order_by('update_time', 'DESC');
         $result = $this->db->get_where($this->table, array('pid' => 0));
 //        dump($this->db->get_compiled_select($this->table));
         return $this->filter($result->result_array());
@@ -46,14 +48,14 @@ class Discuss_model extends CI_Model{
 
     public function getByNew($page, $limit){
         $this->db->limit(($page - 1) * $limit, $page * $limit);
-        $this->db->order_by('create_time DESC');
+        $this->db->order_by('update_time DESC');
         $result = $this->db->get_where($this->table, array('pid' => 0));
         return $this->filter($result->result_array());
     }
 
     public function getByHot($page, $limit) {
         $this->db->limit(($page - 1) * $limit, $page * $limit);
-        $this->db->order_by('create_time desc, reply_count desc');
+        $this->db->order_by('update desc, reply_count desc');
         $result = $this->db->get_where($this->table, array('pid' => 0));
         return $this->filter($result);
     }
