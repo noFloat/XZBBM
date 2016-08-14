@@ -155,10 +155,10 @@
 					dataType: 'json',
 					timeout: 300,
 					success: function(data){
-					    
+						
 					},
 					error: function(xhr, type){
-					  alert('Ajax error!')
+						alert('Ajax error!')
 					}
 				})
 			})
@@ -226,9 +226,9 @@
 		}
 		
 		document.querySelector('button').addEventListener('click',function (event) {
-		var comment = document.querySelector('input').value;
-		questionId= document.querySelector('.content').getAttribute("questionId");
-		$.ajax({
+			var comment = document.querySelector('input').value;
+			questionId= document.querySelector('.content').getAttribute("questionId");
+			$.ajax({
 			  type: 'POST',
 			  url: '<?php echo base_url('index.php/api/reply'); ?>',
 			  // data to be added to query string:
@@ -237,7 +237,43 @@
 			  dataType: 'json',
 			  timeout: 300,
 			  success: function(data){
-			    
+			    var picM, node，sex;
+				if (data.gender == "女") {
+					sex = "学姐";
+				} else if (data.grender == "男") {
+					sex = "学长"
+				} 
+				if(data.pic_name.length == 0) {
+					node = '<div class="comment" commentId ="'+ data.Id +
+					'"><a href="<?php echo base_url('index.php/start/user'); ?>' + data.author_id + 
+					'"><img class = "userPic" src="' + data.headImg + 
+					'" alt=""></a><div class="commentText"><span class = "userName">' + data.name + 
+					'<label class = "userSex">' + sex + 
+					'</label></span><div class="comment-main"><p>'+ data.content +
+					'</p></div><div class="comment-bottom"><span class = "time">' + data.time + 
+					'</span><span class="like"><img class = "likePic" src="static/img/dislike.png" alt="">' + data.like_count + 
+					'</span></div></div></div>';
+				} else if(data.pic_name.length != 0) {
+					for(var i = 0; i < data[index].pic_name.length ; i++ ) {
+						picM = picM +  '<img src="index.php/api/showImg/' + data[index].pic_name[i] + '" alt="">';
+						node = '<div class="comment" commentId ="'+ data.Id +
+						'"><a href="<?php echo base_url('index.php/start/user'); ?>' + data.author_id + 
+						'"><img class = "userPic" src="' + data.headImg + 
+						'" alt=""></a><div class="commentText"><span class = "userName">' + data.name + 
+						'<label class = "userSex">' + sex + 
+						'</label></span><div class="comment-main"><p>'+ data.content +
+						'</p></div><div class="comment-pic">'+  picM +
+						'</div><div class="comment-bottom"><span class = "time">' + data.time + 
+						'</span><span class="like"><img class = "likePic" src="static/img/dislike.png" alt="">' + data.like_count + 
+						'</span></div></div></div>';
+					}
+				} 
+			
+				if (data.gender == "男") {
+					document.querySelectorAll('userSex').style.background = "#2fbeff";	
+				}else if (data.gender == "女") {
+					document.querySelectorAll('userSex').style.background = "#f86cc0";	
+				}
 			  },
 			  error: function(xhr, type){
 			    alert('Ajax error!')
