@@ -90,11 +90,16 @@ class Start extends CI_Controller{
     }
 
     public function user($stuId = '') {
-        $this->auth();
+        $this->on_weixin();
         $this->load->model('discuss_model');
         if(empty($stuId)){
-            $result = $this->discuss_model->showUser($_SESSION['userInfo']['stuNum']);
-            $this->load->view('userDetail', array('render' => $result));
+            if(empty($_SESSION['isLogin'])){
+                echo '你未登录';
+                exit();
+            }else{
+                $result = $this->discuss_model->showUser($_SESSION['userInfo']['stuNum']);
+                $this->load->view('userDetail', array('render' => $result));
+            }
         }else{
             $result = $this->discuss_model->showUser($stuId);
             if(empty($result)){
@@ -105,7 +110,7 @@ class Start extends CI_Controller{
     }
 
     public function index($by = '最新问题', $page = 1, $limit = 5){
-        $this->auth();
+        $this->on_weixin();
         $by = urldecode($by);
         if($by == '最新问题'){
             $this->load->model('discuss_model');
@@ -122,19 +127,19 @@ class Start extends CI_Controller{
     }
 
     public function userQuestion($stuId){
-        $this->auth();
+        $this->on_weixin();
         if(empty($stuId))
             ajax(retData(404, '请访问正确的用户'));
         $this->load->model('discuss_model');
         if(!is_junior($stuId)){
-            ajax(retData('403', '你不是萌新，坏人'));
+            ajax(retData(403, '你不是萌新，坏人'));
         }
         $result = $this->discuss_model->getUserQues($stuId);
         $this->load->view('searchResult', array('render' => $result));
     }
 
     public function userReply($stuId) {
-        $this->auth();
+        $this->on_weixin();
         if(empty($stuId))
             ajax(retData(404, '请访问正确的用户'));
         $isSenior = $this->discuss_model->isSenior($stuId);
@@ -146,8 +151,8 @@ class Start extends CI_Controller{
     }
 
     public function question(){
-        $this->auth();
-        if(is_junior($_SESSION['userInfo']['stuNum'])){
+        $this->on_weixin();
+        if(checkOk()){
             $this->load->view('question');
         }else{
             $this->load->view('questionSorry');
@@ -155,12 +160,12 @@ class Start extends CI_Controller{
     }
 
     public function search(){
-        $this->auth();
+        $this->on_weixin();
         $this->load->view('search');
     }
 
     public function searchResult($type = 'tag', $query = ""){
-        $this->auth();
+        $this->on_weixin();
         if($type == 'tag'){
             $tag = urldecode($query);
             $this->load->model('discuss_model');
@@ -179,7 +184,7 @@ class Start extends CI_Controller{
     }
 
     public function detail($id){
-        $this->auth();
+        $this->on_weixin();
         if(empty($id)){
             ajax(retData(400, '错误的问题id'));
         }

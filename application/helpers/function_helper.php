@@ -138,11 +138,19 @@ function get_base_upload($data){
 }
 
 /**
- * 检查是否登录
+ * 检查是否是合法用户，即志愿者和新生
  * @return bool
  */
-function checkLogin(){
-    return !empty($_SESSION['isLogin']);
+function checkOk(){
+    if(!empty($_SESSION['isLogin'])){
+        if($_SESSION['userType'] == 3){
+            return false;
+        }else{
+            return true;
+        }
+    }else{
+        return false;
+    }
 }
 
 /**

@@ -34,7 +34,7 @@ class Api extends CI_Controller{
     }
 
     public function showImg($name){
-        $this->auth();
+        $this->on_weixin();
         $path = './upload/';
         $file = $path.$name;
         if(!file_exists($file) || !check_filename($name)){
@@ -48,7 +48,7 @@ class Api extends CI_Controller{
     }
 
     public function addQuestion(){
-        if($_SESSION['userType'] != 1){
+        if(empty($_SESSION['isLogin']) || $_SESSION['userType'] != 1){
             ajax(retData(401, '只允许萌新提问哦'));
         }
         $data['title'] = param($_POST['title']);
@@ -73,8 +73,8 @@ class Api extends CI_Controller{
     }
 
     public function reply(){
-        $this->auth();
-        if($_SESSION['userType'] == 3){
+        $this->on_weixin();
+        if(empty($_SESSION['isLogin']) || $_SESSION['userType'] == 3){
             ajax(retData(401, '只允许志愿者和萌新回答哦'));
         }
         $data['pid'] = intval($_POST['pid']);
@@ -89,7 +89,7 @@ class Api extends CI_Controller{
     }
 
     public function search($type = 'tag', $query = ""){
-        $this->auth();
+        $this->on_weixin();
         $query = urldecode($query);
         if($type == 'tag'){
             $tag = $query;
@@ -106,8 +106,8 @@ class Api extends CI_Controller{
         ajax(retData('404', 'unknown type'));
     }
 
-    public function getQuestion($by = '最新问题', $page = 1, $limit = 10){
-        $this->auth();
+    public function getQuestion($by = '最新问题', $page = 1, $limit = 5){
+        $this->on_weixin();
         $by = urldecode($by);
         if($by == '最新问题'){
             $this->load->model('discuss_model');
@@ -123,7 +123,7 @@ class Api extends CI_Controller{
     }
 
     public function question($id){
-        $this->auth();
+        $this->on_weixin();
         if(empty($id)){
             ajax(retData(400, '错误的问题id'));
         }
@@ -137,7 +137,7 @@ class Api extends CI_Controller{
     }
 
     public function user($stuId) {
-        $this->auth();
+        $this->on_weixin();
         if(empty($stuId)){
             ajax(retData(400, '参数错误'));
         }
@@ -159,7 +159,10 @@ class Api extends CI_Controller{
     }
 
     public function like($id){
-        $this->auth();
+        $this->on_weixin();
+        if(!checkOk()){
+            ajax(retData(401, '你没有权限点赞'));
+        }
 //        $_SESSION['userInfo']['stuNum'] = '2015210001';
         if(empty($id)){
             ajax(retData(400, '请传入id'));
