@@ -15,4 +15,9 @@ class Senior_model extends CI_Model{
         $result = $this->db->get_where($this->table, array('stu_id' => $stuId));
         return $result->row();
     }
+
+    public function addHeadImg($stuId, $url){
+        $this->db->where('stu_id', $stuId);
+        $this->db->update($this->table, array('photo' => $url));
+    }
 }

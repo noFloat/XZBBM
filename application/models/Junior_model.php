@@ -25,6 +25,9 @@ class Junior_model extends CI_Model{
         $needle = array('stuNum' => 'stu_id', 'name' => 'name', 'gender' => 'gender', 'classNum' => 'class_num',
             'major' => 'major', 'college' => 'college', 'grade' => 'grade', 'headimgurl' => 'head_url', 'nickname' => 'nick_name');
         $userVo = array_to_db($needle, $userArr);
+        $userVo['stu_id'] = trim($userVo['stu_id']);
+        $userVo['gender'] = trim($userVo['gender']);
+        $userVo['grade'] = trim($userVo['grade']);
         return $this->db->insert($this->table, $userVo);
     }
 
