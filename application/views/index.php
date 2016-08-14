@@ -86,13 +86,14 @@
 			<?php
 		}
 		?>
-		
+
 	</div>
 <?php include './application/views/footer.php'?>
 <script>
 window.onload =function () {
 	var left = document.querySelector('.top-left');
 	var right = document.querySelector('.top-right');
+	var pageH = 1,pageN = 1,page = 1;
 	var body = $('body');
 	var by,startY = body.scrollTop() ,endY;
 	document.querySelector(".top").addEventListener('click',function (event) {
@@ -108,58 +109,63 @@ window.onload =function () {
 			right.className = "top-right click";
 			document.querySelector('.hot').style.display = "block";
 			document.querySelector('.new').style.display = "none";
-		}
-		$.ajax({
-			type: 'GET',
-			url: 'http://locahost/XZBBM/index.php/api/getQuestion/' + by + '',
-			dataType: 'json',
-			timeout: 300,
-			success: function(data){
-				data.forEach(function(item,index,data){
-					var picM, node;
-					if (data[index].pic_name.length == 0) {
-						node = '<a href="detail.html/' + data[index].id + 
-						'"class="content"><div class="content-top"><img class = "userPic" src="' + data[index].headImg + 
-						'" alt=""><span class = "userName">' + data[index].name + 
-						'</span><img class = "arrow" src="static/img/arrow-r.png" alt=""></div><div class="content-main"><h1>' + data[index].title + 
-						'</h1><p>' + data[index].content + 
-						'</p></div><div class="content-bottom"><span class = "time">' + data[index].time + 
-						'</span><span class="comment">' + data[index].reply_count + 
-						'</span></div></a>';
-					} else if(data[index].pic_name.length != 0) {
-						for(var i = 0; i < data[index].pic_name.length ; i++ ) {
-							picM = picM +  '<img src="index.php/api/showImg/' + data[index].pic_name[i] + '" alt="">';
-						}
-						node = '<a href="detail.html/' + data[index].id + 
-						'"class="content"><div class="content-top"><img class = "userPic" src="' + data[index].headImg + 
-						'" alt=""><span class = "userName">' + data[index].name + 
-						'</span><img class = "arrow" src="static/img/arrow-r.png" alt=""></div><div class="content-main"><h1>' + data[index].title + 
-						'</h1><p>' + data[index].content + 
-						'</p></div><div class="content-pic">' + picM + 
-						'</div><div class="content-bottom"><span class = "time">' + data[index].time + 
-						'</span><span class="comment">' + data[index].reply_count + 
-						'</span></div></a>';
+			if (pageH == 1) {
+				$.ajax({
+					type: 'GET',
+					url: '<?php echo base_url('index.php/api/getQuestion/'); ?>' + by + pageH,
+					dataType: 'json',
+					timeout: 300,
+					success: function(data){
+						data.forEach(function(item,index,data){
+							var picM, node;
+							if (data[index].pic_name.length == 0) {
+								node = '<a href="detail.html/' + data[index].id + 
+								'"class="content"><div class="content-top"><img class = "userPic" src="' + data[index].headImg + 
+								'" alt=""><span class = "userName">' + data[index].name + 
+								'</span><img class = "arrow" src="static/img/arrow-r.png" alt=""></div><div class="content-main"><h1>' + data[index].title + 
+								'</h1><p>' + data[index].content + 
+								'</p></div><div class="content-bottom"><span class = "time">' + data[index].time + 
+								'</span><span class="comment">' + data[index].reply_count + 
+								'</span></div></a>';
+							} else if(data[index].pic_name.length != 0) {
+								for(var i = 0; i < data[index].pic_name.length ; i++ ) {
+									picM = picM +  '<img src="index.php/api/showImg/' + data[index].pic_name[i] + '" alt="">';
+								}
+								node = '<a href="detail.html/' + data[index].id + 
+								'"class="content"><div class="content-top"><img class = "userPic" src="' + data[index].headImg + 
+								'" alt=""><span class = "userName">' + data[index].name + 
+								'</span><img class = "arrow" src="static/img/arrow-r.png" alt=""></div><div class="content-main"><h1>' + data[index].title + 
+								'</h1><p>' + data[index].content + 
+								'</p></div><div class="content-pic">' + picM + 
+								'</div><div class="content-bottom"><span class = "time">' + data[index].time + 
+								'</span><span class="comment">' + data[index].reply_count + 
+								'</span></div></a>';
+							}
+							$(".hot").append(node);
+						}) 
+					},
+					error: function(xhr, type){
+						alert('Ajax error!')
 					}
-					if (by == "最新问题") {
-						$(".new").append(node);
-					} else if (by == "最热问题") {
-						$(".hot").append(node);
-					}
-				}) 
-			},
-			error: function(xhr, type){
-				alert('Ajax error!')
+				})
 			}
-		})
+		}
+		
 	})
 	body.on('touchend',function (e) {
 		endY = body.scrollTop();
-		console.log(startY,endY);
+		if (by == "最新问题") {
+			pageN ++;
+			page = pageN;
+		} else if (by == "最热问题") {
+			pageH ++;
+			page = pageH;
+		}
 		if ((endY - startY) > 100) {
 			startY = endY;
 			$.ajax({
 				type: 'GET',
-				url: '',
+				url: '<?php echo base_url('index.php/api/getQuestion/'); ?>' + by + page,
 				dataType: 'json',
 				timeout: 300,
 				success: function(data){
@@ -190,7 +196,9 @@ window.onload =function () {
 						}
 						if (by == "最新问题") {
 							$(".new").append(node);
+							pageN ++;
 						} else if (by == "最热问题") {
+							pageH ++;
 							$(".hot").append(node);
 						}
 					}) 

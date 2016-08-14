@@ -137,7 +137,7 @@
 			}
 		}
 	})
-
+	var questionId,commentId;
 	for (var i = 0; i <= document.querySelectorAll('.comment').length - 1; i++) {
 		(function (i) {
 			var like = document.querySelectorAll('.like')[i].innerText;
@@ -147,18 +147,11 @@
 				} else if (e.target.className == "likePic click"){
 					document.querySelectorAll('.like')[i].innerHTML = '<img class = "likePic" src="static/img/dislike.png" alt="">' + (parseInt(document.querySelectorAll('.like')[i].innerText) - 1);
 				}
-				/*
-					questionID,commentID是为了定位把赞存在哪里。这两个ID是数据库里面的ID，渲染页面的时候渲染出来
-				*/
-				questionID = document.querySelector('.content').getAttribute("questionID");
-				commentID = document.querySelectorAll('.comment')[i].getAttribute("commentID");
-				console.log(commentID);
+				
+				commentId = document.querySelectorAll('.comment')[i].getAttribute("commentId");
 				$.ajax({
-					type: 'POST',
-					url: '',
-					// data to be added to query string:
-					data: { questionID : questionID,commentID : commentID,like : like},
-					// type of data we are expecting in return:
+					type: 'GET',
+					url: '<?php echo base_url('index.php/api/like/'); ?>' + commentId,
 					dataType: 'json',
 					timeout: 300,
 					success: function(data){
@@ -234,11 +227,12 @@
 		
 		document.querySelector('button').addEventListener('click',function (event) {
 		var comment = document.querySelector('input').value;
+		questionId= document.querySelector('.content').getAttribute("questionId");
 		$.ajax({
 			  type: 'POST',
-			  url: '',
+			  url: '<?php echo base_url('index.php/api/reply'); ?>',
 			  // data to be added to query string:
-			  data: { comment : comment,pic : pic},
+			  data: { pid:questionId; content : comment,pic : pic},
 			  // type of data we are expecting in return:
 			  dataType: 'json',
 			  timeout: 300,
