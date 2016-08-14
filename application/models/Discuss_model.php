@@ -159,6 +159,7 @@ class Discuss_model extends CI_Model{
                 $value['name'] = $userInfo['name'];
                 $value['gender'] = $userInfo['sex'];
             }
+            $value['like_count'] = $this->getLikeCount($value['Id']);
             $value['pic_name'] = explode("#", $value['pic_name']);
             $value['tag'] = explode("#", $value['tag']);
             $value['time'] = formatTime(strtotime($value['create_time']));

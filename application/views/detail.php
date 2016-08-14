@@ -101,7 +101,7 @@
                     ?>
                     <div class="comment-bottom">
                         <span class = "time"><?php echo $comment['time'];?></span>
-                        <span class="like"><img class = "likePic <?php if(!$comment['is_like']){echo 'click';} ?>" src="<?php $name = 'like'; if($comment['is_like']){$name='dislike';} echo base_url('static/img/'.$name.'.png');?>" alt="">10</span>
+                        <span class="like"><img class = "likePic <?php if(!$comment['is_like']){echo 'click';} ?>" src="<?php $name = 'like'; if($comment['is_like']){$name='dislike';} echo base_url('static/img/'.$name.'.png');?>" alt=""><?php echo $comment['like_count']; ?></span>
                     </div>
                 </div>
             </div>
