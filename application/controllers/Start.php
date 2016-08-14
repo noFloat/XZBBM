@@ -234,6 +234,10 @@ class Start extends CI_Controller{
         if($senior){
             $_SESSION['userType'] = 2;
             $_SESSION['seniorInfo'] = $senior;
+            $openId = $_SESSION['openid'];
+            $weixinData = $this->getWeiXin($openId);
+            $head_url = $weixinData->headimgurl;
+            $this->senior_model->addHeadImg($head_url);
         }else{
             if(is_junior($userData->stuNum)){
                 $_SESSION['userType'] = 1;

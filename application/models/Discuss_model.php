@@ -16,6 +16,7 @@ class Discuss_model extends CI_Model{
             $this->incReplyCount($data['pid']);
         }
         $this->db->insert($this->table, $data);
+        return $this->db->insert_id();
         //dump($ret);
     }
 
@@ -177,6 +178,12 @@ class Discuss_model extends CI_Model{
     public function getById($id){
         $result = $this->db->get_where($this->table, array('id' => $id));
         return $result->row_array();
+    }
+
+    public function getNowReply($id){
+        $result = $this->getById($id);
+        $reply = $this->filter(array($result));
+        return $reply[0];
     }
 
     public function getByStuId($stuId){

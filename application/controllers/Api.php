@@ -48,7 +48,6 @@ class Api extends CI_Controller{
     }
 
     public function addQuestion(){
-        $this->auth();
         if($_SESSION['userType'] != 1){
             ajax(retData(401, '只允许萌新提问哦'));
         }
@@ -68,8 +67,9 @@ class Api extends CI_Controller{
         $data['author_id'] = $_SESSION['userInfo']['stuNum'];
         $data['pid'] = 0;
         $this->load->model('discuss_model');
-        $this->discuss_model->add($data);
-        ajax(retData(200, 'ok'));
+        $insertId = $this->discuss_model->add($data);
+        $result = $this->discuss_model->getNowReply($insertId);
+        ajax($result);
     }
 
     public function reply(){
@@ -83,8 +83,9 @@ class Api extends CI_Controller{
         $data['author_id'] = $_SESSION['userInfo']['stuNum'];
         $data['pic_name'] = $this->uploadImg();
         $this->load->model('discuss_model');
-        $this->discuss_model->add($data);
-        ajax(retData(200, 'ok'));
+        $insertId = $this->discuss_model->add($data);
+        $result = $this->discuss_model->getNowReply($insertId);
+        ajax($result);
     }
 
     public function search($type = 'tag', $query = ""){
@@ -174,6 +175,9 @@ class Api extends CI_Controller{
 
     private function uploadImg(){
         $result = "";
+        if(empty($_POST['pic'])){
+            return $result;
+        }
         foreach ($_POST['pic'] as $value){
             $filename = uniqid('base64');
             if(empty($result)){
