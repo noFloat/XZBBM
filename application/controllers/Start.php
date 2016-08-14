@@ -94,8 +94,7 @@ class Start extends CI_Controller{
         $this->load->model('discuss_model');
         if(empty($stuId)){
             if(empty($_SESSION['isLogin'])){
-                echo '你未登录';
-                exit();
+                redirect(base_url('index.php/start/login'));
             }else{
                 $result = $this->discuss_model->showUser($_SESSION['userInfo']['stuNum']);
                 $this->load->view('userDetail', array('render' => $result));

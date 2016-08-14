@@ -165,7 +165,11 @@ class Discuss_model extends CI_Model{
             $value['pic_name'] = explode("#", $value['pic_name']);
             $value['tag'] = explode("#", $value['tag']);
             $value['time'] = formatTime(strtotime($value['create_time']));
-            $value['is_like'] = in_array($_SESSION['userInfo']['stuNum'], explode(',', $value['like_it']))?true:false;
+            if(checkOk()){
+                $value['is_like'] = in_array($_SESSION['userInfo']['stuNum'], explode(',', $value['like_it']))?true:false;
+            }else{
+                $value['is_like'] = false;
+            }
             $result_f[] = $value;
         }
         return $result_f;
