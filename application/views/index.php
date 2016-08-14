@@ -53,7 +53,7 @@
 		<?php
 		foreach ($render as $question) {
 			?>
-			<a href="<?php base_url('index.php/start/detail/'.$question['Id']); ?>" class="content">
+			<a href="<?php echo base_url('index.php/start/detail/'.$question['Id']); ?>" class="content">
 				<div class="content-top">
 					<img class="userPic" src="<?php echo $question['headImg']; ?>" alt="">
 					<span class="userName"><?php echo $question['name']; ?></span>
@@ -88,6 +88,9 @@
 		?>
 
 	</div>
+    <div class = "hot">
+
+    </div>
     <footer>
         <div class="index">
             <a href="<?php echo base_url('index.php/start/index'); ?>">
@@ -123,7 +126,7 @@ window.onload =function () {
 	var right = document.querySelector('.top-right');
 	var pageH = 1,pageN = 1,page = 1;
 	var body = $('body');
-	var by,startY = body.scrollTop() ,endY;
+	var by = '最新问题',startY = body.scrollTop() ,endY;
 	document.querySelector(".top").addEventListener('click',function (event) {
 		if(event.target.innerText == "最新问题") {
 			by = "最新问题";
@@ -140,33 +143,33 @@ window.onload =function () {
 			if (pageH == 1) {
 				$.ajax({
 					type: 'GET',
-					url: '<?php echo base_url('index.php/api/getQuestion/'); ?>' + by + pageH,
+					url: '<?php echo base_url('index.php/api/getQuestion/'); ?>' + by + '/'+ pageH,
 					dataType: 'json',
-					timeout: 300,
+					timeout: 10000,
 					success: function(data){
 						data.forEach(function(item,index,data){
-							var picM, node;
+							var picM = "", node;
 							if (data[index].pic_name.length == 0) {
 								node = '<a href="detail.html/' + data[index].id + 
 								'"class="content"><div class="content-top"><img class = "userPic" src="' + data[index].headImg + 
 								'" alt=""><span class = "userName">' + data[index].name + 
-								'</span><img class = "arrow" src="static/img/arrow-r.png" alt=""></div><div class="content-main"><h1>' + data[index].title + 
+								'</span><img class = "arrow" src="<?php echo base_url('static/img/arrow-r.png');?>" alt=""></div><div class="content-main"><h1>' + data[index].title +
 								'</h1><p>' + data[index].content + 
 								'</p></div><div class="content-bottom"><span class = "time">' + data[index].time + 
-								'</span><span class="comment">' + data[index].reply_count + 
+								'</span><span class="comment">' + data[index].reply_count  + '评论' +
 								'</span></div></a>';
 							} else if(data[index].pic_name.length != 0) {
 								for(var i = 0; i < data[index].pic_name.length ; i++ ) {
-									picM = picM +  '<img src="index.php/api/showImg/' + data[index].pic_name[i] + '" alt="">';
+									picM = picM +  '<img src="<?php echo base_url('index.php/api/showImg/');?>' + data[index].pic_name[i] + '" alt="">';
 								}
 								node = '<a href="detail.html/' + data[index].id + 
 								'"class="content"><div class="content-top"><img class = "userPic" src="' + data[index].headImg + 
 								'" alt=""><span class = "userName">' + data[index].name + 
-								'</span><img class = "arrow" src="static/img/arrow-r.png" alt=""></div><div class="content-main"><h1>' + data[index].title + 
+								'</span><img class = "arrow" src="<?php echo base_url('static/img/arrow-r.png');?>" alt=""></div><div class="content-main"><h1>' + data[index].title +
 								'</h1><p>' + data[index].content + 
 								'</p></div><div class="content-pic">' + picM + 
 								'</div><div class="content-bottom"><span class = "time">' + data[index].time + 
-								'</span><span class="comment">' + data[index].reply_count + 
+								'</span><span class="comment">' + data[index].reply_count +  '评论' +
 								'</span></div></a>';
 							}
 							$(".hot").append(node);
@@ -180,7 +183,7 @@ window.onload =function () {
 		}
 		
 	})
-	body.on('touchend',function (e) {
+	body.on('touchmove',function (e) {
 		endY = body.scrollTop();
 		if (by == "最新问题") {
 			pageN ++;
@@ -193,9 +196,9 @@ window.onload =function () {
 			startY = endY;
 			$.ajax({
 				type: 'GET',
-				url: '<?php echo base_url('index.php/api/getQuestion/'); ?>' + by + page,
+				url: '<?php echo base_url('index.php/api/getQuestion/'); ?>' + by + '/'+ page,
 				dataType: 'json',
-				timeout: 300,
+				timeout: 10000,
 				success: function(data){
 					data.forEach(function(item,index,data){
 						var picM, node;
@@ -203,23 +206,23 @@ window.onload =function () {
 							node = '<a href="detail.html/' + data[index].id + 
 							'"class="content"><div class="content-top"><img class = "userPic" src="' + data[index].headImg + 
 							'" alt=""><span class = "userName">' + data[index].name + 
-							'</span><img class = "arrow" src="static/img/arrow-r.png" alt=""></div><div class="content-main"><h1>' + data[index].title + 
+							'</span><img class = "arrow" src="<?php base_url('static/img/arrow-r.png');?>" alt=""></div><div class="content-main"><h1>' + data[index].title +
 							'</h1><p>' + data[index].content + 
-							'</p></div><div class="content-bottom"><span class = "time">' + data[index].time + 
-							'</span><span class="comment">' + data[index].reply_count + 
+							'</p></div><div class="content-bottom"><span class = "time">' + data[index].time +
+							'</span><span class="comment">' + data[index].reply_count + '评论' +
 							'</span></div></a>';
 						} else if(data[index].pic_name.length != 0) {
 							for(var i = 0; i < data[index].pic_name.length ; i++ ) {
-								picM = picM +  '<img src="index.php/api/showImg/' + data[index].pic_name[i] + '" alt="">';
+								picM = picM +  '<img src="<?php echo base_url('index.php/api/showImg/')?>' + data[index].pic_name[i] + '" alt="">';
 							}
 							node = '<a href="detail.html/' + data[index].id + 
 							'"class="content"><div class="content-top"><img class = "userPic" src="' + data[index].headImg + 
 							'" alt=""><span class = "userName">' + data[index].name + 
-							'</span><img class = "arrow" src="static/img/arrow-r.png" alt=""></div><div class="content-main"><h1>' + data[index].title + 
+							'</span><img class = "arrow" src="<?php echo base_url('static/img/arrow-r.png');?>" alt=""></div><div class="content-main"><h1>' + data[index].title +
 							'</h1><p>' + data[index].content + 
 							'</p></div><div class="content-pic">' + picM + 
 							'</div><div class="content-bottom"><span class = "time">' + data[index].time + 
-							'</span><span class="comment">' + data[index].reply_count + 
+							'</span><span class="comment">' + data[index].reply_count + '评论' +
 							'</span></div></a>';
 						}
 						if (by == "最新问题") {
@@ -239,14 +242,12 @@ window.onload =function () {
 
 	})
 
-	(function () {
-		document.querySelector('input').addEventListener('keyup',function (event) {
-			if (event.keyCode == 13) {
-				var keyWord = document.querySelector('input').value;
-				window.location = '<?php echo base_url('index.php/start/searchResult/word/'); ?>' + keyWord;
-			}
-		})
-	})();	
+    document.querySelector('input').addEventListener('keyup',function (event) {
+        if (event.keyCode == 13) {
+            var keyWord = document.querySelector('input').value;
+            window.location = '<?php echo base_url('index.php/start/searchResult/word/'); ?>' + keyWord;
+        }
+    })
 }
 </script>
 </html>

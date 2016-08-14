@@ -37,10 +37,9 @@
 <body>
 <?php
 if(empty($render)){
-	echo '<h1>';
-	echo '没查找你要的问题，你可以提问';
+	echo '<h1 style = "font-size:1rem;color:red;width :80%;margin: 0 auto">';
+	echo '未找到你要的问题，你可以提问';
 	echo '</h1>';
-	echo 'index.php/start/question';
 
 }
 foreach ($render as $question) {

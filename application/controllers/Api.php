@@ -174,6 +174,7 @@ class Api extends CI_Controller{
     }
 
     private function uploadImg(){
+        $path = './upload/';
         $result = "";
         if(empty($_POST['pic'])){
             return $result;
@@ -185,7 +186,7 @@ class Api extends CI_Controller{
             }else{
                 $result .= '#'.$filename;
             }
-            file_put_contents($filename, get_base_upload($value));
+            file_put_contents($path.$filename, $value);
         }
         return $result;
     }

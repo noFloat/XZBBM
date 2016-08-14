@@ -187,6 +187,9 @@
 				clicked[i] = clicks[i].innerHTML;
 			}
 		})();
+        for(var i = 0; i < pic.length; i++) {
+            pic[i] = pic[i].toString();
+        }
 		$.ajax({
 			  type: 'POST',
 			  url: '<?php echo base_url('index.php/api/addQuestion'); ?>',
@@ -202,7 +205,7 @@
 			    	alert("问题描述长度大于100")
 			    } else if(data.status == 412) {
 			    	alert("请选择标签")
-			    } else if(data.status == 200) {
+			    } else  {
 			    	window.location = '<?php echo base_url('index.php/start/index'); ?>'
 			    }
 			  },

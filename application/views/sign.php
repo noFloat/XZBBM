@@ -41,17 +41,18 @@
 	<div class = "form">
 		<div class="user">
 			<img src="<?php echo base_url('static/img/people.png'); ?>" alt="">
-			<input id = "user" type="text" placeholder="姓名">
+			<input id = "user" type="text" placeholder="学号">
 		</div>
 		<div class="pwd">
 			<img src="<?php echo base_url('static/img/lock.png'); ?>" alt="">
-			<input id = "pwd" type="password" placeholder="考生号后6位">
+			<input id = "pwd" type="password" placeholder="身份证后6位">
 		</div>
 		<p id = "msg">
 			通过审核的学长学姐用学号和身份证后六位
 		</p>
 		<button>登录</button>
 	</div>
+	<a href="<?php echo base_url('index.php/start/index'); ?>">随便逛逛 ></a>
 	<span id = "index_url" url = "<?php echo base_url('index.php/start/index'); ?>"></span>
 	<i>
 		&copy红岩网校工作站

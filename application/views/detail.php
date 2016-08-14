@@ -101,7 +101,7 @@
                     ?>
                     <div class="comment-bottom">
                         <span class = "time"><?php echo $comment['time'];?></span>
-                        <span class="like"><img class = "likePic <?php if(!$comment['is_like']){echo 'click';} ?>" src="<?php $name = 'like'; if($comment['is_like']){$name='dislike';} echo base_url('static/img/'.$name.'.png');?>" alt=""><?php echo $comment['like_count']; ?></span>
+                        <span class="like"><img class = "likePic<?php if($comment['is_like']){echo ' click';} ?>" src="<?php $name = 'dislike'; if($comment['is_like']){$name='like';} echo base_url('static/img/'.$name.'.png');?>" alt=""><?php echo $comment['like_count']; ?></span>
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@
 	</div>
 	<div class="bottom" style = "position: relative;"></div>
 	<div class="bottom">
-		<img src="" alt="">
+		<img src="<?php echo base_url('static/img/pic-icon.png')?>" alt="">
 		<input type="text">
 		<button>发表</button>
 	</div>
@@ -127,9 +127,8 @@
 <script>
 	window.onload = function () {
 	// body...
-	document.querySelector('.bottom').addEventListener('click',function(e){
+	document.querySelectorAll('.bottom')[1].addEventListener('click',function(e){
 		if (e.target.localName == "img") {
-			console.log(1);
 			if (document.querySelector('.addPics').style.display == "") {
 				document.querySelector('.addPics').style.display = "block";
 			} else if (document.querySelector('.addPics').style.display == "block") {
@@ -143,9 +142,9 @@
 			var like = document.querySelectorAll('.like')[i].innerText;
 			document.querySelectorAll('.comment')[i].addEventListener('click',function(e){
 			if (e.target.className == "likePic") {
-					document.querySelectorAll('.like')[i].innerHTML = '<img class = "likePic click" src="static/img/like.png" alt="">' + (parseInt(document.querySelectorAll('.like')[i].innerText) + 1);
+					document.querySelectorAll('.like')[i].innerHTML = '<img class = "likePic click" src="<?php echo base_url('static/img/like.png')?>" alt="">' + (parseInt(document.querySelectorAll('.like')[i].innerText) + 1);
 				} else if (e.target.className == "likePic click"){
-					document.querySelectorAll('.like')[i].innerHTML = '<img class = "likePic" src="static/img/dislike.png" alt="">' + (parseInt(document.querySelectorAll('.like')[i].innerText) - 1);
+					document.querySelectorAll('.like')[i].innerHTML = '<img class = "likePic" src="<?php echo base_url('static/img/dislike.png')?>" alt="">' + (parseInt(document.querySelectorAll('.like')[i].innerText) - 1);
 				}
 				
 				commentId = document.querySelectorAll('.comment')[i].getAttribute("commentId");
@@ -153,7 +152,7 @@
 					type: 'GET',
 					url: '<?php echo base_url('index.php/api/like/'); ?>' + commentId,
 					dataType: 'json',
-					timeout: 300,
+					timeout: 10000,
 					success: function(data){
 						
 					},
@@ -226,18 +225,21 @@
 		}
 		
 		document.querySelector('button').addEventListener('click',function (event) {
-			var comment = document.querySelector('input').value;
+			var comment = document.querySelectorAll('input')[1].value;
+            for(var i = 0; i < pic.length; i++) {
+                pic[i] = pic[i].toString();
+            }
 			questionId= document.querySelector('.content').getAttribute("questionId");
 			$.ajax({
 			  type: 'POST',
 			  url: '<?php echo base_url('index.php/api/reply'); ?>',
 			  // data to be added to query string:
-			  data: { pid:questionId; content : comment,pic : pic},
+			  data: { pid:questionId, content : comment,pic : pic},
 			  // type of data we are expecting in return:
 			  dataType: 'json',
-			  timeout: 300,
+			  timeout: 10000,
 			  success: function(data){
-			    var picM, node，sex;
+			    var picM = "", node, sex;
 				if (data.gender == "女") {
 					sex = "学姐";
 				} else if (data.grender == "男") {
@@ -254,21 +256,25 @@
 					'</span><span class="like"><img class = "likePic" src="static/img/dislike.png" alt="">' + data.like_count + 
 					'</span></div></div></div>';
 				} else if(data.pic_name.length != 0) {
-					for(var i = 0; i < data[index].pic_name.length ; i++ ) {
-						picM = picM +  '<img src="index.php/api/showImg/' + data[index].pic_name[i] + '" alt="">';
-						node = '<div class="comment" commentId ="'+ data.Id +
-						'"><a href="<?php echo base_url('index.php/start/user'); ?>' + data.author_id + 
-						'"><img class = "userPic" src="' + data.headImg + 
-						'" alt=""></a><div class="commentText"><span class = "userName">' + data.name + 
-						'<label class = "userSex">' + sex + 
-						'</label></span><div class="comment-main"><p>'+ data.content +
-						'</p></div><div class="comment-pic">'+  picM +
-						'</div><div class="comment-bottom"><span class = "time">' + data.time + 
-						'</span><span class="like"><img class = "likePic" src="static/img/dislike.png" alt="">' + data.like_count + 
-						'</span></div></div></div>';
-					}
+					for(var i = 0; i < data.pic_name.length ; i++ ) {
+                        picM = picM + '<img src="index.php/api/showImg/' + data.pic_name[i] + '" alt="">';
+                    }
+                    node = '<div class="comment" commentId ="'+ data.Id +
+                    '"><a href="<?php echo base_url('index.php/start/user'); ?>' + data.author_id +
+                    '"><img class = "userPic" src="' + data.headImg +
+                    '" alt=""></a><div class="commentText"><span class = "userName">' + data.name +
+                    '<label class = "userSex">' + sex +
+                    '</label></span><div class="comment-main"><p>'+ data.content +
+                    '</p></div><div class="comment-pic">'+  picM +
+                    '</div><div class="comment-bottom"><span class = "time">' + data.time +
+                    '</span><span class="like"><img class = "likePic" src="static/img/dislike.png" alt="">' + data.like_count +
+                    '</span></div></div></div>';
 				} 
-			
+			    if ($('.comment')) {
+                    $($('.comment')[0]).before(node);
+                } else {
+                    $('.comment-wp').append(node);
+                }
 				if (data.gender == "男") {
 					document.querySelectorAll('userSex').style.background = "#2fbeff";	
 				}else if (data.gender == "女") {

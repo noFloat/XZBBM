@@ -55,9 +55,9 @@ class Discuss_model extends CI_Model{
 
     public function getByHot($page, $limit) {
         $this->db->limit(($page - 1) * $limit, $page * $limit);
-        $this->db->order_by('update desc, reply_count desc');
+        $this->db->order_by('update_time desc, reply_count desc');
         $result = $this->db->get_where($this->table, array('pid' => 0));
-        return $this->filter($result);
+        return $this->filter($result->result_array());
     }
 
     public function likeMgr($id){
@@ -173,7 +173,7 @@ class Discuss_model extends CI_Model{
 
     public function getComment($id){
         $where = array('pid' => $id);
-        $this->db->order_by('create_time', 'DESC');
+        $this->db->order_by('update_time', 'DESC');
         $result = $this->db->get_where($this->table, $where);
         return $this->filter($result->result_array());
     }
