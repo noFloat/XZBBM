@@ -168,7 +168,7 @@ include './application/views/footer.php';
 			  data: { title: title ,content : detail,tag : clicked,pic : pic},
 			  // type of data we are expecting in return:
 			  dataType: 'json',
-			  timeout: 3000,
+			  timeout: 10000,
 			  success: function(data){
 			    if(data.status == 410 ) {
 			    	alert("标题长度大于20");
